@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
@@ -37,19 +39,44 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.rootContainer);
 
         TextView t = (TextView) findViewById(R.id.text1);
+        t.setText(readWholeFile("foo.txt"));
+
+    }
+
+    private ArrayList<String> readFileIntoList(String filename) {
+        ArrayList<String> lines = new ArrayList<String>();
+        try {
+            InputStream inputreader = getAssets().open("foo.txt");
+            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+
+            boolean hasNextLine = true;
+            String line = buffreader.readLine();
+            while (line != null) {
+                lines.add(line);
+                line = buffreader.readLine();
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        return lines;
+    }
+
+    private String readWholeFile(String filename) {
         AssetManager assetManager = getAssets();
         // To get names of all files inside the "Files" folder
         try {
             String[] files = assetManager.list("Files");
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         // To load text file
         InputStream input;
+        String text = "Error: File not read";
         try {
-            input = assetManager.open("foo.txt");
+            input = assetManager.open(filename);
 
             int size = input.available();
             byte[] buffer = new byte[size];
@@ -57,15 +84,15 @@ public class MainActivity extends AppCompatActivity {
             input.close();
 
             // byte buffer into a string
-            String text = new String(buffer);
-
-            t.setText(text);
+            text = new String(buffer);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return text;
     }
 
+    // Automatically adds a button the current view. It's dimensions match the layout params in the
+    // xml file
     private void addBtn(String s) {
         // Create Button Dynamically
         Button btnShow = new Button(this);
