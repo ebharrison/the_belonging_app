@@ -36,17 +36,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
 
+        //testing
         TextView t = (TextView) findViewById(R.id.text1);
-        t.setText(readWholeFile("foo.txt"));
+        t.setText(readFile("jon.txt"));
 
     }
 
+    // Given @filename, this returns an arraylist with the contents of @filename
+    // Each element in returned list is one line in file
     private ArrayList<String> readFileIntoList(String filename) {
         ArrayList<String> lines = new ArrayList<String>();
         try {
-            InputStream inputreader = getAssets().open("foo.txt");
+            InputStream inputreader = getAssets().open(filename);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
 
             boolean hasNextLine = true;
@@ -57,38 +61,29 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
-
         return lines;
     }
 
-    private String readWholeFile(String filename) {
-        AssetManager assetManager = getAssets();
-        // To get names of all files inside the "Files" folder
+    // Return string contains contents of @filename
+    private String readFile(String filename) {
+        String lines = "";
         try {
-            String[] files = assetManager.list("Files");
+            InputStream inputreader = getAssets().open(filename);
+            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+
+            boolean hasNextLine = true;
+            String line = buffreader.readLine();
+            while (line != null) {
+                lines += line + "\n";
+                line = buffreader.readLine();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // To load text file
-        InputStream input;
-        String text = "Error: File not read";
-        try {
-            input = assetManager.open(filename);
-
-            int size = input.available();
-            byte[] buffer = new byte[size];
-            input.read(buffer);
-            input.close();
-
-            // byte buffer into a string
-            text = new String(buffer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return text;
+        return lines;
     }
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
