@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, R.string.welcome_message, Toast.LENGTH_LONG).show();
+
             }
         });
 
