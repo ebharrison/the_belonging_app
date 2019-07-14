@@ -1,5 +1,6 @@
 package com.example.dynamic_btns;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -101,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_story_text);
-                ((TextView) findViewById(R.id.storyView)).setText(readFile(filename));
+                Intent i = new Intent(MainActivity.this, story_text.class);
+                i.putExtra("cur_story", filename);
+                startActivity(i);
             }
         });
 
