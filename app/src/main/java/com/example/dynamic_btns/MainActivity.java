@@ -39,10 +39,34 @@ public class MainActivity extends AppCompatActivity {
         // set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
 
-        //testing
-        TextView t = (TextView) findViewById(R.id.text1);
-        t.setText(readFile("jon.txt"));
+        //read in all story titles
+        ArrayList<String> story_titles = readFileIntoList("story_titles.txt");
 
+        // For each story, make a button, whose text is the title, and changes the text to be
+        // the story
+        for (String story : story_titles) {
+            addBtn(story);
+        }
+    }
+
+    // Return string contains contents of @filename
+    private String readFile(String filename) {
+        String lines = "";
+        try {
+            InputStream inputreader = getAssets().open(filename);
+            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+
+            boolean hasNextLine = true;
+            String line = buffreader.readLine();
+            while (line != null) {
+                lines += line + "\n";
+                line = buffreader.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
     }
 
     // Given @filename, this returns an arraylist with the contents of @filename
@@ -66,37 +90,18 @@ public class MainActivity extends AppCompatActivity {
         return lines;
     }
 
-    // Return string contains contents of @filename
-    private String readFile(String filename) {
-        String lines = "";
-        try {
-            InputStream inputreader = getAssets().open(filename);
-            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
-
-            boolean hasNextLine = true;
-            String line = buffreader.readLine();
-            while (line != null) {
-                lines += line + "\n";
-                line = buffreader.readLine();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
-    private void addBtn(String s) {
+    private void addBtn(final String filename) {
         // Create Button Dynamically
         Button btnShow = new Button(this);
-        btnShow.setText(s);
+        btnShow.setText(filename);
         btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                setContentView(R.layout.activity_story_text);
+                ((TextView) findViewById(R.id.storyView)).setText(readFile(filename));
             }
         });
 
