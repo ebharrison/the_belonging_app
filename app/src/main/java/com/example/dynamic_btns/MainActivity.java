@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 lines += line + "\n";
                 line = buffreader.readLine();
             }
-
+            inputreader.close();
+            buffreader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 lines.add(line);
                 line = buffreader.readLine();
             }
-
+            inputreader.close();
+            buffreader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
     private void addBtn(final String filename) {
+        if (!fileExistsInAssets(filename)) {
+            System.out.println("Error: " + filename + " was named in the list file, but was not found in" +
+                    " the assets folder.");
+            System.exit(1);
+        }
+
         // Create Button Dynamically
         Button btnShow = new Button(this);
         btnShow.setText(filename);
@@ -112,5 +120,19 @@ public class MainActivity extends AppCompatActivity {
         if (linearLayout != null) {
             linearLayout.addView(btnShow);
         }
+    }
+
+    private boolean fileExistsInAssets(String filename) {
+        AssetManager mg = getResources().getAssets();
+        InputStream is = null;
+        try {
+            // File exists since it was able to open an input stream
+            is = mg.open(filename);
+            is.close();
+        } catch (IOException ex) {
+            //file does not exist
+            return false;
+        }
+        return true;
     }
 }
