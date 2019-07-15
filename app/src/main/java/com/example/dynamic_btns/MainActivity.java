@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         //read in all story titles
         ArrayList<String> story_titles = readFileIntoList("story_titles.txt");
+        if (story_titles.size() == 0) {
+            System.out.println("Error: No stories named in list file.");
+            System.exit(1);
+        }
 
         // For each story, make a button, whose text is the title, and changes the text to be
         // the story
@@ -105,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
         // Create Button Dynamically
         Button btnShow = new Button(this);
         btnShow.setText(filename);
-        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

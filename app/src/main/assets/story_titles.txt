@@ -1,6 +1,5 @@
+foo.txt
+bar.txt
 bar.txt
 foo.txt
 jon.txt
-rad.txt
-wet.txt
-dead.txt
