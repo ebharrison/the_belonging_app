@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -13,16 +15,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class story_text extends AppCompatActivity {
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_text);
+        linearLayout = findViewById(R.id.rootContainer);
 
         Intent i = getIntent();
         String cur_story = i.getStringExtra("cur_story");
-        TextView t = (TextView) findViewById(R.id.storyView);
-        t.setText(readFile(cur_story));
+
+        TextView story_box = new TextView(this);
+        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        story_box.setText(readFile(cur_story));
+
+        // Add Button to LinearLayout
+        if (linearLayout != null) {
+            linearLayout.addView(story_box);
+        }
 
         Button button = (Button) findViewById(R.id.return_btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +59,8 @@ public class story_text extends AppCompatActivity {
                 lines += line + "\n";
                 line = buffreader.readLine();
             }
-
+            inputreader.close();
+            buffreader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

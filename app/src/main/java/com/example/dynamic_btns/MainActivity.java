@@ -54,27 +54,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Return string contains contents of @filename
-    private String readFile(String filename) {
-        String lines = "";
-        try {
-            InputStream inputreader = getAssets().open(filename);
-            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
-
-            boolean hasNextLine = true;
-            String line = buffreader.readLine();
-            while (line != null) {
-                lines += line + "\n";
-                line = buffreader.readLine();
-            }
-            inputreader.close();
-            buffreader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
     // Given @filename, this returns an arraylist with the contents of @filename
     // Each element in returned list is one line in file
     private ArrayList<String> readFileIntoList(String filename) {
