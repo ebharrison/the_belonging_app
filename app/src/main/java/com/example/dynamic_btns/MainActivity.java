@@ -24,18 +24,36 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
+
+    // used for creating story buttons
     private ArrayList<String> story_names = new ArrayList<String>();
+
+    // used for searching both tags and stories
+    // hashmap connects the tags to the stories
+    // key: story title
+    // value: tags associated with story
+    private HashMap<String, ArrayList<String>> tags = new HashMap<String, ArrayList<String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // create view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button search_btn = (Button) findViewById(R.id.search_button);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, search_bar_activity.class);
+                startActivity(i);
+            }
+        });
 
         // set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
