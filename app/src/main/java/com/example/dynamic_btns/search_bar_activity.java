@@ -17,6 +17,7 @@ import java.util.Set;
 public class search_bar_activity extends AppCompatActivity {
     private HashMap<String, ArrayList<String>> stories;
     private ArrayAdapter<String> adapter;
+    private ArrayList<String> storiesAndTags;
 
     private ListView listView;
 
@@ -33,7 +34,7 @@ public class search_bar_activity extends AppCompatActivity {
 
         //Getting Set of keys from HashMap
         Set<String> keySet = stories.keySet();
-        ArrayList<String> storiesAndTags = new ArrayList<>(keySet);
+        storiesAndTags = new ArrayList<>(keySet);
 
         // add tags, without duplicates, to list of story titles
         for (ArrayList<String> tags : stories.values()) {
@@ -42,18 +43,27 @@ public class search_bar_activity extends AppCompatActivity {
             }
         }
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storiesAndTags);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                storiesAndTags);
         listView.setAdapter(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // todo make it static to handle tag chaining
+
                 return false;
             }
 
             @Override
+            // if contains space, filter on both tags
             public boolean onQueryTextChange(String newText) {
+                adapter = new ArrayAdapter<String>(search_bar_activity.this,
+                        android.R.layout.simple_list_item_1, storiesAndTags);
+                listView.setAdapter(adapter);
+
                 adapter.getFilter().filter(newText);
+
                 return false;
             }
         });
@@ -62,16 +72,15 @@ public class search_bar_activity extends AppCompatActivity {
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(),
-//                        "Click List Item " + adapter.getItem(position), Toast.LENGTH_SHORT)
-//                        .show();
-
                 String user_choice = adapter.getItem(position);
+
                 if (stories.keySet().contains(user_choice)) {
                     //user_choice is a tag
                     adapter = new ArrayAdapter<String>(search_bar_activity.this,
                             android.R.layout.simple_list_item_1, stories.get(user_choice));
                     listView.setAdapter(adapter);
+
+                    // populate search bar with tag?
 
                 } else {
                     //user_choice is an actual story
