@@ -26,7 +26,7 @@ public class search_bar_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
 
-        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        final SearchView searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.myList);
 
         Intent i = getIntent();
@@ -74,13 +74,14 @@ public class search_bar_activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String user_choice = adapter.getItem(position);
 
-                if (stories.keySet().contains(user_choice)) {
+                if (isTag(user_choice)) {
                     //user_choice is a tag
                     adapter = new ArrayAdapter<String>(search_bar_activity.this,
                             android.R.layout.simple_list_item_1, stories.get(user_choice));
                     listView.setAdapter(adapter);
 
                     // populate search bar with tag?
+                    searchView.setQuery(user_choice, false);
 
                 } else {
                     //user_choice is an actual story
@@ -90,5 +91,9 @@ public class search_bar_activity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean isTag(String item) {
+        return stories.keySet().contains(item);
     }
 }
