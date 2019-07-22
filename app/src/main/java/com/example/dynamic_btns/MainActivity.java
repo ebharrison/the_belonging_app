@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     // used for searching both tags and stories
     // hashmap connects the tags to the stories
-    // key: story title
-    // value: tags associated with story
-    private HashMap<String, String[]> storiesAndTags;
+    // key: tag
+    // value: stories with @key tag
+    private HashMap<String, ArrayList<String>> storiesAndTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,29 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
         //read in all story titles
         storiesAndTags = processStoryTags("story_titles.txt");
-        if (storiesAndTags.size() == 0) {
-            System.out.println("Error: No stories named in list file.");
-            System.exit(1);
-        }
-
-        // For each story, make a button, whose text is the title, and changes the text to be
-        // the story
-        for (String story : storiesAndTags.keySet()) {
-            addBtn(story);
-            System.out.print("Tags for " + story + " are:");
-            for (String tag : storiesAndTags.get(story)) {
-                System.out.print(tag + ", ");
-            }
-            System.out.println();
-        }
     }
 
     // Given @filename, this returns an arraylist with the contents of @filename
     // Each element in returned list is one line in file
-    private HashMap<String, String[]> processStoryTags(String filename) {
+    private HashMap<String, ArrayList<String>> processStoryTags(String filename) {
         checkFileExistsInAssets(filename);
 
-        HashMap<String, String[]> storiesAndTags = new HashMap<String, String[]>();
+        HashMap<String, ArrayList<String>> storiesAndTags = new HashMap<String, ArrayList<String>>();
         try {
             InputStream inputreader = getAssets().open(filename);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
@@ -88,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
             String story_title = buffreader.readLine();
             while (story_title != null) {
                 //add story and tags to hashmap
-                storiesAndTags.put(story_title, getTagsFor(story_title));
+                for (String tag : getTagsFor(story_title)) {
+                    // if hashmap doesn't contain tag, add tag and initalize array
+                    if (!storiesAndTags.containsKey(tag))
+                        storiesAndTags.put(tag, new ArrayList<String>());
+
+                    storiesAndTags.get(tag).add(story_title);
+                }
+                // while looping over all story titles, make button for each story
+                addBtn(story_title);
 
                 story_title = buffreader.readLine();
             }
@@ -137,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_story_text);
                 Intent i = new Intent(MainActivity.this, story_text.class);
                 i.putExtra("cur_story", filename);
                 startActivity(i);

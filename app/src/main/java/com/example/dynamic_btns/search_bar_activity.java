@@ -15,11 +15,9 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class search_bar_activity extends AppCompatActivity {
-    private HashMap<String, String[]> stories;
-    private ArrayList<String> storiesAndTags;
+    private HashMap<String, ArrayList<String>> stories;
     private ArrayAdapter<String> adapter;
 
-    private SearchView searchView;
     private ListView listView;
 
     @Override
@@ -27,24 +25,24 @@ public class search_bar_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
 
-        searchView = (SearchView) findViewById(R.id.searchView);
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.myList);
 
         Intent i = getIntent();
-        stories = (HashMap<String, String[]>) i.getSerializableExtra("story_and_tags");
+        stories = (HashMap<String, ArrayList<String>>) i.getSerializableExtra("story_and_tags");
 
         //Getting Set of keys from HashMap
         Set<String> keySet = stories.keySet();
-        storiesAndTags = new ArrayList<>(keySet);
+        ArrayList<String> storiesAndTags = new ArrayList<>(keySet);
 
         // add tags, without duplicates, to list of story titles
-        for (String[] tags : stories.values()) {
+        for (ArrayList<String> tags : stories.values()) {
             for (String tag : tags) {
                 if (!storiesAndTags.contains(tag)) storiesAndTags.add(tag);
             }
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, storiesAndTags);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storiesAndTags);
         listView.setAdapter(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -64,9 +62,23 @@ public class search_bar_activity extends AppCompatActivity {
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Click List Item " + adapter.getItem(position), Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(getApplicationContext(),
+//                        "Click List Item " + adapter.getItem(position), Toast.LENGTH_SHORT)
+//                        .show();
+
+                String user_choice = adapter.getItem(position);
+                if (stories.keySet().contains(user_choice)) {
+                    //user_choice is a tag
+                    adapter = new ArrayAdapter<String>(search_bar_activity.this,
+                            android.R.layout.simple_list_item_1, stories.get(user_choice));
+                    listView.setAdapter(adapter);
+
+                } else {
+                    //user_choice is an actual story
+                    Intent i = new Intent(search_bar_activity.this, story_text.class);
+                    i.putExtra("cur_story", user_choice);
+                    startActivity(i);
+                }
             }
         });
     }
