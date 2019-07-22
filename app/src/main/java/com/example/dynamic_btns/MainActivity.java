@@ -31,14 +31,11 @@ import java.util.Vector;
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
 
-    // used for creating story buttons
-    private ArrayList<String> story_names = new ArrayList<String>();
-
     // used for searching both tags and stories
     // hashmap connects the tags to the stories
     // key: story title
     // value: tags associated with story
-    private HashMap<String, ArrayList<String>> tags = new HashMap<String, ArrayList<String>>();
+    private HashMap<String, String[]> storiesAndTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
+                i.putExtra("story_and_tags", storiesAndTags);
                 startActivity(i);
             }
         });
@@ -59,49 +57,77 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.rootContainer);
 
         //read in all story titles
-        ArrayList<String> story_titles = readFileIntoList("story_titles.txt");
-        if (story_titles.size() == 0) {
+        storiesAndTags = processStoryTags("story_titles.txt");
+        if (storiesAndTags.size() == 0) {
             System.out.println("Error: No stories named in list file.");
             System.exit(1);
         }
 
         // For each story, make a button, whose text is the title, and changes the text to be
         // the story
-        for (String story : story_titles) {
+        for (String story : storiesAndTags.keySet()) {
             addBtn(story);
+            System.out.print("Tags for " + story + " are:");
+            for (String tag : storiesAndTags.get(story)) {
+                System.out.print(tag + ", ");
+            }
+            System.out.println();
         }
     }
 
     // Given @filename, this returns an arraylist with the contents of @filename
     // Each element in returned list is one line in file
-    private ArrayList<String> readFileIntoList(String filename) {
-        ArrayList<String> lines = new ArrayList<String>();
+    private HashMap<String, String[]> processStoryTags(String filename) {
+        checkFileExistsInAssets(filename);
+
+        HashMap<String, String[]> storiesAndTags = new HashMap<String, String[]>();
         try {
             InputStream inputreader = getAssets().open(filename);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
 
-            boolean hasNextLine = true;
-            String line = buffreader.readLine();
-            while (line != null) {
-                lines.add(line);
-                line = buffreader.readLine();
+            String story_title = buffreader.readLine();
+            while (story_title != null) {
+                //add story and tags to hashmap
+                storiesAndTags.put(story_title, getTagsFor(story_title));
+
+                story_title = buffreader.readLine();
             }
+
             inputreader.close();
             buffreader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return storiesAndTags;
+    }
+
+    private String[] getTagsFor(String story_title) {
+        checkFileExistsInAssets(story_title);
+
+        String[] tags = null;
+        try {
+            InputStream inputreader = getAssets().open(story_title);
+            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+
+            String allTags = buffreader.readLine();
+            tags = allTags.split(",");
+            for (int i = 0; i < tags.length; i++) {
+                tags[i] = tags[i].trim();
+            }
+
+            inputreader.close();
+            buffreader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tags;
     }
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
     private void addBtn(final String filename) {
-        if (!fileExistsInAssets(filename)) {
-            System.out.println("Error: " + filename + " was named in the list file, but was not found in" +
-                    " the assets folder.");
-            System.exit(1);
-        }
+        checkFileExistsInAssets(filename);
 
         // Create Button Dynamically
         Button btnShow = new Button(this);
@@ -124,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean fileExistsInAssets(String filename) {
+    private void checkFileExistsInAssets(String filename) {
         AssetManager mg = getResources().getAssets();
         InputStream is = null;
         try {
@@ -132,9 +158,9 @@ public class MainActivity extends AppCompatActivity {
             is = mg.open(filename);
             is.close();
         } catch (IOException ex) {
-            //file does not exist
-            return false;
+            System.out.println("Error: " + filename + " was named in the list file, but was not found in" +
+                    " the assets folder.");
+            System.exit(1);
         }
-        return true;
     }
 }
