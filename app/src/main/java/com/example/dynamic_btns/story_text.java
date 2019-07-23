@@ -14,7 +14,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
 public class story_text extends AppCompatActivity {
+    // default text size
+    public static final int TEXT_SIZE = 20;
+
     private LinearLayout linearLayout;
 
     @Override
@@ -30,6 +34,7 @@ public class story_text extends AppCompatActivity {
         story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         story_box.setText(readFile(cur_story));
+        story_box.setTextSize(TEXT_SIZE);
 
         // Add Button to LinearLayout
         if (linearLayout != null) {
