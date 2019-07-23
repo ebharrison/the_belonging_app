@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 
 public class story_text extends AppCompatActivity {
     // default text size
-    public static final int TEXT_SIZE = 20;
+    private static final int TEXT_SIZE = 20;
 
     private LinearLayout linearLayout;
 

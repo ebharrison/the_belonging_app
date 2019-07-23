@@ -29,8 +29,10 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    private LinearLayout linearLayout;
+    // constant set to name of file that contains the list of all stories to be read
+    private static final String STORY_LIST_FILE = "story_titles.txt";
 
+    private LinearLayout linearLayout;
     // used for searching both tags and stories
     // hashmap connects the tags to the stories
     // key: tag
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.rootContainer);
 
         //read in all story titles
-        storiesAndTags = processStoryTags("story_titles.txt");
+        storiesAndTags = processStoryTags(STORY_LIST_FILE);
     }
 
     // Given @filename, this returns an arraylist with the contents of @filename
