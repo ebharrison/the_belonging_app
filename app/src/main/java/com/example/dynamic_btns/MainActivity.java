@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         return storiesAndTags;
     }
 
+    // @return an array with each element corresponding to a tag for @param
     private String[] getTagsFor(String story_title) {
         checkFileExistsInAssets(story_title);
 
@@ -144,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Determine if @param filename exists in the assets folder. If it does, the program will
+    // proceed. If it does not exist, an exception is thrown
     private void checkFileExistsInAssets(String filename) {
         AssetManager mg = getResources().getAssets();
         InputStream is = null;

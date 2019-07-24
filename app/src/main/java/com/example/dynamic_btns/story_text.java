@@ -16,16 +16,14 @@ import java.io.InputStreamReader;
 
 
 public class story_text extends AppCompatActivity {
-    // default text size
+    // default text size for textview used to show story
     private static final int TEXT_SIZE = 20;
-
-    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_text);
-        linearLayout = findViewById(R.id.rootContainer);
+        LinearLayout linearLayout = findViewById(R.id.rootContainer);
 
         Intent i = getIntent();
         String cur_story = i.getStringExtra("cur_story");
@@ -33,7 +31,7 @@ public class story_text extends AppCompatActivity {
         TextView story_box = new TextView(this);
         story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        story_box.setText(readFile(cur_story));
+        story_box.setText(readStory(cur_story));
         story_box.setTextSize(TEXT_SIZE);
 
         // Add Button to LinearLayout
@@ -51,17 +49,20 @@ public class story_text extends AppCompatActivity {
         });
     }
 
-    // Return string contains contents of @filename
-    private String readFile(String filename) {
-        String lines = "";
+    // Return string contains contents of @param story_name. It skips the first line since the first
+    // line should contain all the tags
+    private String readStory(String story_name) {
+        String story = "";
         try {
-            InputStream inputreader = getAssets().open(filename);
+            InputStream inputreader = getAssets().open(story_name);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
 
-            boolean hasNextLine = true;
+            // read and discard first line of file. It only contains tags of story
+            buffreader.readLine();
+
             String line = buffreader.readLine();
             while (line != null) {
-                lines += line + "\n";
+                story += line + "\n";
                 line = buffreader.readLine();
             }
             inputreader.close();
@@ -69,6 +70,6 @@ public class story_text extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return story;
     }
 }

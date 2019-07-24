@@ -1,4 +1,4 @@
-wet,dry,fun
+wet,dry,fun,boo
 this is the wet file.
 I don't know how I got a text file wet.
 Uh oh.
