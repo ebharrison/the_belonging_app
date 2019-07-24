@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
 
+        //todo:rewrite for async task
         //read in all story titles
         storiesAndTags = processStoryTags(STORY_LIST_FILE);
     }
@@ -69,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
 
         HashMap<String, ArrayList<String>> storiesAndTags = new HashMap<String, ArrayList<String>>();
         try {
+            /**todo
+             * alter this method to read from url
+             * for async task pass 2 param
+             * first is url
+             * second is num lines to read
+             * second param is good so i can read 2 lines for tags and title, and stop thread
+             * ie if 0 read whole file, if 2, read 2 lines
+             * also have to do error check for param in async class
+             *
+             * i think i should also make a second hashmap with storytitle -> url for story_text.java
+             */
+
             InputStream inputreader = getAssets().open(filename);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
 
@@ -102,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         String[] tags = null;
         try {
+            //todo rewrite since this also reads files
             InputStream inputreader = getAssets().open(story_title);
             BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
 
@@ -145,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //todo comment out checkFileExistsInAssets
+
     // Determine if @param filename exists in the assets folder. If it does, the program will
     // proceed. If it does not exist, an exception is thrown
     private void checkFileExistsInAssets(String filename) {
@@ -159,5 +175,15 @@ public class MainActivity extends AppCompatActivity {
                     " the assets folder.");
             System.exit(1);
         }
+    }
+
+    public boolean isConnected() {
+        try {
+            final String command = "ping -c 1 google.com";
+            return Runtime.getRuntime().exec(command).waitFor() == 0;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 }

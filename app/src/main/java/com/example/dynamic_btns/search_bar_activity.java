@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+
+//todo: bug if query text contains partial tag and then user selects a tag
 public class search_bar_activity extends AppCompatActivity {
     private static final String TAG_DELIMITER = " ";
 

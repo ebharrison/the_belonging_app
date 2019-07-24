@@ -49,6 +49,11 @@ public class story_text extends AppCompatActivity {
         });
     }
 
+    /**
+     * todo rewrite so as to fetch story
+     * maybe make hashmap to connect story name to story url
+     */
+
     // Return string contains contents of @param story_name. It skips the first line since the first
     // line should contain all the tags
     private String readStory(String story_name) {
