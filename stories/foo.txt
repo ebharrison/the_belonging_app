@@ -1,0 +1,7 @@
+foones,foo,far,fun,boo,bob
+this is the foo files
+test change
+i
+am
+so
+good
