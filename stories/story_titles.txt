@@ -1,3 +1,3 @@
-foo.txt
-bar.txt
-jon.txt
+https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/bar.txt?token=AKOWS3UI6T5ZUXLEBUW2BCS5INXAU
+https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/jon.txt?token=AKOWS3QBOUTWC64V26HQ3OC5INXAM
+https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/foo.txt?token=AKOWS3QUVGIDGVA2AYFWTFS5INXAQ
