@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = " ";
 
     // constant set to name of file that contains the list of all stories to be read
-    private static final String STORY_LIST_FILE = "story_titles.txt";
+    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/story_titles.txt?token=AKOWS3VHEQOXNEYI2Y5LSCK5INXDG";
 
     private LinearLayout linearLayout;
     // used for searching both tags and stories
@@ -49,84 +49,75 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     private String[] fileContents = null;
 
+    TextFileReader asyncTask = new TextFileReader();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // create view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button search_btn = (Button) findViewById(R.id.search_button);
-        search_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, search_bar_activity.class);
-                i.putExtra("story_and_tags", storiesAndTags);
-                startActivity(i);
-            }
-        });
+//        Button search_btn = (Button) findViewById(R.id.search_button);
+//        search_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, search_bar_activity.class);
+//                i.putExtra("story_and_tags", storiesAndTags);
+//                startActivity(i);
+//            }
+//        });
 
         // set linearlayout for dynamically created buttons
-        linearLayout = findViewById(R.id.rootContainer);
+//        linearLayout = findViewById(R.id.rootContainer);
 
-        //todo:rewrite for async task
-        //read in all story titles
-        processStories(STORY_LIST_FILE);
+        //processStories(STORY_LIST_URL);
+
+        //use this to set delegate/listener back to this class
+        asyncTask.delegate = this;
+        asyncTask.execute(STORY_LIST_URL);
+
+        Button button = findViewById(R.id.search_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (String s : fileContents) {
+                    System.out.println(s + " yay");
+                }
+//                System.out.println("INTERNET?: "+isConnected());
+            }
+        });
     }
 
     // Returns hashmap with tags as keys, and list of stories with the tag as the value
     // the filename must be a list of urls to the corresponding stories
-    private void processStories(String filename) {
-        // fileContents now contains the url of all current stories
-            new TextFileReader().execute(STORY_LIST_FILE, "0");
-
-        //copy the urls into a new array since we will use the async task again and it will save
-        //the new data to fileContents
-        String[] allStoryUrl = fileContents;
-        for (String storyUrl : allStoryUrl) {
-            //read first two lines of every file to extract the tags and story title
-            new TextFileReader().execute(storyUrl, "2");
-
-            //add story and tags to hashmap
-            for (String tag : fileContents[1].split(TAG_DELIMITER)) {
-                // if hashmap doesn't contain tag, add tag and initalize array
-                if (!storiesAndTags.containsKey(tag))
-                    storiesAndTags.put(tag, new ArrayList<String>());
-                storiesAndTags.get(tag).add(fileContents[0]);
-            }
-
-            storyToUrl.put(fileContents[0], storyUrl);
-
-            addBtn(fileContents[0]);
-        }
-    }
+//    private void processStories(String filename) {
+//        // fileContents now contains the url of all current stories
+//        new TextFileReader().execute(STORY_LIST_URL, "0");
+//
+//        //copy the urls into a new array since we will use the async task again and it will save
+//        //the new data to fileContents
+//        String[] allStoryUrl = fileContents;
+//        for (String storyUrl : allStoryUrl) {
+//            //read first two lines of every file to extract the tags and story title
+//            new TextFileReader().execute(storyUrl, "2");
+//
+//            //add story and tags to hashmap
+//            for (String tag : fileContents[1].split(TAG_DELIMITER)) {
+//                // if hashmap doesn't contain tag, add tag and initalize array
+//                if (!storiesAndTags.containsKey(tag))
+//                    storiesAndTags.put(tag, new ArrayList<String>());
+//                storiesAndTags.get(tag).add(fileContents[0]);
+//            }
+//
+//            storyToUrl.put(fileContents[0], storyUrl);
+//
+//            addBtn(fileContents[0]);
+//        }
+//    }
 
     public void processFinish(String output) {
         fileContents = output.split("\n");
     }
-
-    // @return an array with each element corresponding to a tag for @param
-//    private String[] getTagsFor(String story_title) {
-//        checkFileExistsInAssets(story_title);
-//
-//        String[] tags = null;
-//        try {
-//            InputStream inputreader = getAssets().open(story_title);
-//            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
-//
-//            String allTags = buffreader.readLine();
-//            tags = allTags.split(",");
-//            for (int i = 0; i < tags.length; i++) {
-//                tags[i] = tags[i].trim();
-//            }
-//
-//            inputreader.close();
-//            buffreader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return tags;
-//    }
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
@@ -153,22 +144,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             linearLayout.addView(btnShow);
         }
     }
-
-    // Determine if @param filename exists in the assets folder. If it does, the program will
-    // proceed. If it does not exist, an exception is thrown
-//    private void checkFileExistsInAssets(String filename) {
-//        AssetManager mg = getResources().getAssets();
-//        InputStream is = null;
-//        try {
-//            // File exists since it was able to open an input stream
-//            is = mg.open(filename);
-//            is.close();
-//        } catch (IOException ex) {
-//            System.out.println("Error: " + filename + " was named in the list file, but was not found in" +
-//                    " the assets folder.");
-//            System.exit(1);
-//        }
-//    }
 
     public boolean isConnected() {
         try {
