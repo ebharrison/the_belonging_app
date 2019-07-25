@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
     // constant set to name of file that contains the list of all stories to be read
     private static final String STORY_LIST_FILE = "story_titles.txt";
 
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     // key: tag
     // value: stories with @key tag
     private HashMap<String, ArrayList<String>> storiesAndTags;
+
+    private String[] allStoryUrl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         storiesAndTags = processStoryTags(STORY_LIST_FILE);
     }
 
-    // Given @filename, this returns an arraylist with the contents of @filename
-    // Each element in returned list is one line in file
+    // Returns hashmap with tags as keys, and list of stories with the tag as the value
+    // the filename must be a list of urls to the corresponding stories
     private HashMap<String, ArrayList<String>> processStoryTags(String filename) {
         checkFileExistsInAssets(filename);
 
@@ -82,31 +84,40 @@ public class MainActivity extends AppCompatActivity {
              * i think i should also make a second hashmap with storytitle -> url for story_text.java
              */
 
-            InputStream inputreader = getAssets().open(filename);
-            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+//            InputStream inputreader = getAssets().open(filename);
+//            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+//
+//            String story_title = buffreader.readLine();
+//            while (story_title != null) {
+//                //add story and tags to hashmap
+//                for (String tag : getTagsFor(story_title)) {
+//                    // if hashmap doesn't contain tag, add tag and initalize array
+//                    if (!storiesAndTags.containsKey(tag))
+//                        storiesAndTags.put(tag, new ArrayList<String>());
+//
+//                    storiesAndTags.get(tag).add(story_title);
+//                }
+//                // while looping over all story titles, make button for each story
+//                addBtn(story_title);
+//
+//                story_title = buffreader.readLine();
+//            }
+//            inputreader.close();
+//            buffreader.close();
 
-            String story_title = buffreader.readLine();
-            while (story_title != null) {
-                //add story and tags to hashmap
-                for (String tag : getTagsFor(story_title)) {
-                    // if hashmap doesn't contain tag, add tag and initalize array
-                    if (!storiesAndTags.containsKey(tag))
-                        storiesAndTags.put(tag, new ArrayList<String>());
+            new TextFileReader().execute(STORY_LIST_FILE, "0");
 
-                    storiesAndTags.get(tag).add(story_title);
-                }
-                // while looping over all story titles, make button for each story
-                addBtn(story_title);
 
-                story_title = buffreader.readLine();
-            }
 
-            inputreader.close();
-            buffreader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return storiesAndTags;
+    }
+
+    public void processFinish(String output) {
+        allStoryUrl = output.split("\n");
     }
 
     // @return an array with each element corresponding to a tag for @param
@@ -177,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //todo change from google to github
     public boolean isConnected() {
         try {
             final String command = "ping -c 1 google.com";
