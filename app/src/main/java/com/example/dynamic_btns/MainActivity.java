@@ -76,41 +76,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     // Returns hashmap with tags as keys, and list of stories with the tag as the value
     // the filename must be a list of urls to the corresponding stories
     private void processStories(String filename) {
-//        HashMap<String, ArrayList<String>> storiesAndTags = new HashMap<String, ArrayList<String>>();
-//        try {
-        /**
-             * alter this method to read from url
-             * for async task pass 2 param
-             * first is url
-             * second is num lines to read
-             * second param is good so i can read 2 lines for tags and title, and stop thread
-             * ie if 0 read whole file, if 2, read 2 lines
-             * also have to do error check for param in async class
-             *
-             * i think i should also make a second hashmap with storytitle -> url for story_text.java
-             */
-
-//            InputStream inputreader = getAssets().open(filename);
-//            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
-//
-//            String story_title = buffreader.readLine();
-//            while (story_title != null) {
-//                //add story and tags to hashmap
-//                for (String tag : getTagsFor(story_title)) {
-//                    // if hashmap doesn't contain tag, add tag and initalize array
-//                    if (!storiesAndTags.containsKey(tag))
-//                        storiesAndTags.put(tag, new ArrayList<String>());
-//
-//                    storiesAndTags.get(tag).add(story_title);
-//                }
-//                // while looping over all story titles, make button for each story
-//                addBtn(story_title);
-//
-//                story_title = buffreader.readLine();
-//            }
-//            inputreader.close();
-//            buffreader.close();
-
         // fileContents now contains the url of all current stories
             new TextFileReader().execute(STORY_LIST_FILE, "0");
 
@@ -133,11 +98,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
             addBtn(fileContents[0]);
         }
-
-
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void processFinish(String output) {
