@@ -19,13 +19,23 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
         try {
             url = new URL(params[0]);
             bufferReader = new BufferedReader(new InputStreamReader(url.openStream()));
+
             if (params[1] == "0") {
                 while ((TextHolder2 = bufferReader.readLine()) != null) {
                     TextHolder += TextHolder2 + "\n";
                 }
             } else {
-                for (int i = 0; i < Integer.parseInt(params[1]); i++)
-                    TextHolder += TextHolder2 + "\n";
+                int count = Integer.parseInt(params[1]);
+                if (0 > count) {  //negative number
+                    //discard the first count number of lines, and then read the rest
+                    for (int i = 0; i < count; i++) {
+                        TextHolder2 = bufferReader.readLine();
+                    }
+                }
+                for (int i = 0; i < Math.abs(count); i++) {
+                    TextHolder2 = bufferReader.readLine();
+                    TextHolder += TextHolder2;
+                }
             }
 
             bufferReader.close();

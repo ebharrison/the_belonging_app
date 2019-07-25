@@ -15,9 +15,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class story_text extends AppCompatActivity {
+public class story_text extends AppCompatActivity implements AsyncResponse {
     // default text size for textview used to show story
     private static final int TEXT_SIZE = 20;
+    private String cur_story = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,16 @@ public class story_text extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
 
         Intent i = getIntent();
-        String cur_story = i.getStringExtra("cur_story");
+        String curUrl = i.getStringExtra("curUrl");
 
         TextView story_box = new TextView(this);
         story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        story_box.setText(readStory(cur_story));
+
+
+        //todo rewrite readstory so it reads from url not file
+        new TextFileReader().execute(curUrl, "-2");
+        story_box.setText(cur_story);
         story_box.setTextSize(TEXT_SIZE);
 
         // Add Button to LinearLayout
@@ -49,6 +54,11 @@ public class story_text extends AppCompatActivity {
         });
     }
 
+    public void processFinish(String output) {
+        cur_story = output;
+    }
+
+
     /**
      * todo rewrite so as to fetch story
      * maybe make hashmap to connect story name to story url
@@ -56,25 +66,27 @@ public class story_text extends AppCompatActivity {
 
     // Return string contains contents of @param story_name. It skips the first line since the first
     // line should contain all the tags
-    private String readStory(String story_name) {
-        String story = "";
-        try {
-            InputStream inputreader = getAssets().open(story_name);
-            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+//    private String readStory(String story_name) {
+//        String story = "";
+//        try {
+//            InputStream inputreader = getAssets().open(story_name);
+//            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
+//
+//            // read and discard first line of file. It only contains tags of story
+//            buffreader.readLine();
+//
+//            String line = buffreader.readLine();
+//            while (line != null) {
+//                story += line + "\n";
+//                line = buffreader.readLine();
+//            }
+//            inputreader.close();
+//            buffreader.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return story;
+//    }
 
-            // read and discard first line of file. It only contains tags of story
-            buffreader.readLine();
 
-            String line = buffreader.readLine();
-            while (line != null) {
-                story += line + "\n";
-                line = buffreader.readLine();
-            }
-            inputreader.close();
-            buffreader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return story;
-    }
 }
