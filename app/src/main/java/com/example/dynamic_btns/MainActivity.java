@@ -50,10 +50,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private HashMap<String, String> storyToUrl = new HashMap<String, String>();
 
     private String[] fileContents = null;
-    private int indexUrl = 0;
     private String[] allStoryUrl = null;
+    private int indexUrl = 0;
 
-    TextFileReader asyncTask = null;
     private boolean hasStoryListBeenRead = false;
 
     @Override
@@ -65,32 +64,37 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Button search_btn = (Button) findViewById(R.id.search_button);
-//        search_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, search_bar_activity.class);
-//                i.putExtra("story_and_tags", storiesAndTags);
-//                startActivity(i);
-//            }
-//        });
+        Button search_btn = (Button) findViewById(R.id.search_button);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, search_bar_activity.class);
+
+                Bundle extras = new Bundle();
+                extras.putSerializable("STORIES_AND_TAGS", storiesAndTags);
+                extras.putSerializable("STORIES_AND_URLS", storyToUrl);
+                i.putExtras(extras);
+
+                startActivity(i);
+            }
+        });
 
 //      set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
 
-        Button button = findViewById(R.id.search_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (String s : fileContents) {
-                    System.out.println(s + " yay");
-                }
-            }
-        });
+//        Button button = findViewById(R.id.search_button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                for (String s : fileContents) {
+//                    System.out.println(s + " yay");
+//                }
+//            }
+//        });
     }
 
     public void startNewAsyncTask(String url) {
-        asyncTask = new TextFileReader();
+        TextFileReader asyncTask = new TextFileReader();
         //use this to set delegate/listener back to this class
         asyncTask.delegate = MainActivity.this;
         asyncTask.execute(url);
