@@ -30,6 +30,8 @@ import java.util.Vector;
 
 //TODO STORY TITLE PRECEEDS TAGS
 
+//todo encode spinner icon to load stories then show gui
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = " ";
 
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // connect to internet and load stories
+        startNewAsyncTask(STORY_LIST_URL);
+
         // create view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -68,12 +73,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 //            }
 //        });
 
-        // set linearlayout for dynamically created buttons
-//        linearLayout = findViewById(R.id.rootContainer);
-
-
-        //use this to set delegate/listener back to this class
-
+//         set linearlayout for dynamically created buttons
+        linearLayout = findViewById(R.id.rootContainer);
 
         Button button = findViewById(R.id.search_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -85,11 +86,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        startNewAsyncTask(STORY_LIST_URL);
+
     }
 
     public void startNewAsyncTask(String url) {
         asyncTask = new TextFileReader();
+        //use this to set delegate/listener back to this class
         asyncTask.delegate = MainActivity.this;
         asyncTask.execute(url);
     }
@@ -125,32 +127,32 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //first line is the title, second line is tags
         //add story and tags to hashmap
 
-//        System.out.println(fileContents[0] + " howdy");
-//        System.out.println(fileContents[1] + " howdy");
+        System.out.println(fileContents[0] + " howdy");
+        System.out.println(fileContents[1] + " howdy");
 
         for (String tag : fileContents[1].split(TAG_DELIMITER)) {
-//                // if hashmap doesn't contain tag, add tag and initalize array
-//                if (!storiesAndTags.containsKey(tag))
-//                    storiesAndTags.put(tag, new ArrayList<String>());
-//                storiesAndTags.get(tag).add(fileContents[0]);
+            // if hashmap doesn't contain tag, add tag and initalize array
+            if (!storiesAndTags.containsKey(tag))
+                storiesAndTags.put(tag, new ArrayList<String>());
+            storiesAndTags.get(tag).add(fileContents[0]);
         }
-//
-//            storyToUrl.put(fileContents[0], storyUrl);
-//
-//            addBtn(fileContents[0]);
+
+        storyToUrl.put(fileContents[0], cur_url);
+
+        System.out.println(fileContents[0] + " was added to table with url " + cur_url);
+
+        addBtn(fileContents[0]);
     }
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
     //todo rewrite to handle story title and url
     private void addBtn(final String story_name) {
-
         // Create Button Dynamically
-        Button btnShow = new Button(this);
+        Button btnShow = new Button(MainActivity.this);
         btnShow.setText(story_name);
         btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        //todo for button putextra, it will use hashtable to give url of story
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
