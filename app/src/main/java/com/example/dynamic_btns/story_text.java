@@ -18,31 +18,16 @@ import java.io.InputStreamReader;
 public class story_text extends AppCompatActivity implements AsyncResponse {
     // default text size for textview used to show story
     private static final int TEXT_SIZE = 20;
-    private String cur_story = "";
+    private TextView story_box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_text);
-        LinearLayout linearLayout = findViewById(R.id.rootContainer);
 
         Intent i = getIntent();
         String curUrl = i.getStringExtra("curUrl");
-
-        TextView story_box = new TextView(this);
-        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-
-
-        //todo rewrite readstory so it reads from url not file
-        new TextFileReader().execute(curUrl, "-2");
-        story_box.setText(cur_story);
-        story_box.setTextSize(TEXT_SIZE);
-
-        // Add Button to LinearLayout
-        if (linearLayout != null) {
-            linearLayout.addView(story_box);
-        }
+        startNewAsyncTask(curUrl);
 
         Button button = (Button) findViewById(R.id.return_btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -54,39 +39,23 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         });
     }
 
-    public void processFinish(String output) {
-        cur_story = output;
+    public void startNewAsyncTask(String url) {
+        TextFileReader asyncTask = new TextFileReader();
+        //use this to set delegate/listener back to this class
+        asyncTask.delegate = story_text.this;
+        asyncTask.execute(url);
     }
 
+    public void processFinish(String output) {
+        story_box = new TextView(this);
+        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        story_box.setText(output);
 
-    /**
-     * todo rewrite so as to fetch story
-     * maybe make hashmap to connect story name to story url
-     */
-
-    // Return string contains contents of @param story_name. It skips the first line since the first
-    // line should contain all the tags
-//    private String readStory(String story_name) {
-//        String story = "";
-//        try {
-//            InputStream inputreader = getAssets().open(story_name);
-//            BufferedReader buffreader = new BufferedReader(new InputStreamReader(inputreader));
-//
-//            // read and discard first line of file. It only contains tags of story
-//            buffreader.readLine();
-//
-//            String line = buffreader.readLine();
-//            while (line != null) {
-//                story += line + "\n";
-//                line = buffreader.readLine();
-//            }
-//            inputreader.close();
-//            buffreader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return story;
-//    }
-
-
+        // Add textview to LinearLayout
+        LinearLayout linearLayout = findViewById(R.id.rootContainer);
+        if (linearLayout != null) {
+            linearLayout.addView(story_box);
+        }
+    }
 }

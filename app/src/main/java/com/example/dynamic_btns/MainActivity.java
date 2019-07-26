@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private HashMap<String, String> storyToUrl = new HashMap<String, String>();
 
     private String[] fileContents = null;
+    private int indexUrl = 0;
+    private String[] allStoryUrl = null;
+
     TextFileReader asyncTask = null;
-    private String cur_url = null;
     private boolean hasStoryListBeenRead = false;
 
     @Override
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 //            }
 //        });
 
-//         set linearlayout for dynamically created buttons
+//      set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
 
         Button button = findViewById(R.id.search_button);
@@ -85,8 +87,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 }
             }
         });
-
-
     }
 
     public void startNewAsyncTask(String url) {
@@ -113,13 +113,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
         //copy the urls into a new array since we will use the async task again and it will save
         //the new data to fileContents
-        String[] allStoryUrl = fileContents;
+        allStoryUrl = fileContents;
         for (String storyUrl : allStoryUrl) {
-//            System.out.println(storyUrl+" whoo hoo");
-////            //read first two lines of every file to extract the tags and story title
-            cur_url = storyUrl;
-            startNewAsyncTask(cur_url);
+            //read first two lines of every file to extract the tags and story title
+            startNewAsyncTask(storyUrl);
         }
+
     }
 
     private void readStoryData() {
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //first line is the title, second line is tags
         //add story and tags to hashmap
 
+        String cur_url = allStoryUrl[indexUrl++];
         System.out.println(fileContents[0] + " howdy");
         System.out.println(fileContents[1] + " howdy");
 
@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
-    //todo rewrite to handle story title and url
     private void addBtn(final String story_name) {
         // Create Button Dynamically
         Button btnShow = new Button(MainActivity.this);
