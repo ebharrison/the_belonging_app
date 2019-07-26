@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private HashMap<String, String> storyToUrl = new HashMap<String, String>();
 
     private String[] fileContents = null;
-
-    TextFileReader asyncTask = new TextFileReader();
+    TextFileReader asyncTask = null;
+    private String cur_url = null;
+    private boolean hasStoryListBeenRead = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +71,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // set linearlayout for dynamically created buttons
 //        linearLayout = findViewById(R.id.rootContainer);
 
-        //processStories(STORY_LIST_URL);
 
         //use this to set delegate/listener back to this class
-        asyncTask.delegate = this;
-        asyncTask.execute(STORY_LIST_URL);
+
 
         Button button = findViewById(R.id.search_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -83,25 +82,50 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 for (String s : fileContents) {
                     System.out.println(s + " yay");
                 }
-//                System.out.println("INTERNET?: "+isConnected());
             }
         });
+
+        startNewAsyncTask(STORY_LIST_URL);
+    }
+
+    public void startNewAsyncTask(String url) {
+        asyncTask = new TextFileReader();
+        asyncTask.delegate = MainActivity.this;
+        asyncTask.execute(url);
+    }
+
+    public void processFinish(String output) {
+        fileContents = output.split("\n");
+        if (!hasStoryListBeenRead) {
+            processStories();
+            hasStoryListBeenRead = true;
+        } else {
+            readStoryData();
+        }
     }
 
     // Returns hashmap with tags as keys, and list of stories with the tag as the value
     // the filename must be a list of urls to the corresponding stories
-//    private void processStories(String filename) {
-//        // fileContents now contains the url of all current stories
-//        new TextFileReader().execute(STORY_LIST_URL, "0");
-//
-//        //copy the urls into a new array since we will use the async task again and it will save
-//        //the new data to fileContents
-//        String[] allStoryUrl = fileContents;
-//        for (String storyUrl : allStoryUrl) {
-//            //read first two lines of every file to extract the tags and story title
-//            new TextFileReader().execute(storyUrl, "2");
-//
-//            //add story and tags to hashmap
+    private void processStories() {
+        // fileContents now contains the url of all current stories
+
+        //copy the urls into a new array since we will use the async task again and it will save
+        //the new data to fileContents
+        String[] allStoryUrl = fileContents;
+        for (String storyUrl : allStoryUrl) {
+//            System.out.println(storyUrl+" whoo hoo");
+////            //read first two lines of every file to extract the tags and story title
+            cur_url = storyUrl;
+            startNewAsyncTask(cur_url);
+        }
+    }
+
+    private void readStoryData() {
+        //fileContents now contain first two lines of present story to be handled
+        //first line is the title, second line is tags
+        //add story and tags to hashmap
+
+        System.out.println(cur_url + " howdy");
 //            for (String tag : fileContents[1].split(TAG_DELIMITER)) {
 //                // if hashmap doesn't contain tag, add tag and initalize array
 //                if (!storiesAndTags.containsKey(tag))
@@ -112,11 +136,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 //            storyToUrl.put(fileContents[0], storyUrl);
 //
 //            addBtn(fileContents[0]);
-//        }
-//    }
-
-    public void processFinish(String output) {
-        fileContents = output.split("\n");
     }
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the

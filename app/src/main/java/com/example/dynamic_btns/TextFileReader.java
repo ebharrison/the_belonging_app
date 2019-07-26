@@ -26,14 +26,10 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
             bufferReader.close();
 
         } catch (MalformedURLException malformedURLException) {
-
-            // TODO Auto-generated catch block
             malformedURLException.printStackTrace();
             TextHolder = malformedURLException.toString();
 
         } catch (IOException iOException) {
-
-            // TODO Auto-generated catch block
             iOException.printStackTrace();
 
             TextHolder = iOException.toString();
