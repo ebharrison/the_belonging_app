@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = " ";
 
     // constant set to name of file that contains the list of all stories to be read
-    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/story_titles.txt?token=AKOWS3VHEQOXNEYI2Y5LSCK5INXDG";
+    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/story_titles.txt?token=AKOWS3SAUZUFMBA7KUFZZ5K5IOAHK";
 
     private LinearLayout linearLayout;
     // used for searching both tags and stories
@@ -125,13 +125,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //first line is the title, second line is tags
         //add story and tags to hashmap
 
-        System.out.println(cur_url + " howdy");
-//            for (String tag : fileContents[1].split(TAG_DELIMITER)) {
+//        System.out.println(fileContents[0] + " howdy");
+//        System.out.println(fileContents[1] + " howdy");
+
+        for (String tag : fileContents[1].split(TAG_DELIMITER)) {
 //                // if hashmap doesn't contain tag, add tag and initalize array
 //                if (!storiesAndTags.containsKey(tag))
 //                    storiesAndTags.put(tag, new ArrayList<String>());
 //                storiesAndTags.get(tag).add(fileContents[0]);
-//            }
+        }
 //
 //            storyToUrl.put(fileContents[0], storyUrl);
 //
