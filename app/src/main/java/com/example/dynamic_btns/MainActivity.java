@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             //read first two lines of every file to extract the tags and story title
             startNewAsyncTask(storyUrl);
         }
-
+        System.out.println("Have all async taks finish?");
     }
 
     private void readStoryData() {
@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //add story and tags to hashmap
 
         String cur_url = allStoryUrl[indexUrl++];
-        System.out.println(fileContents[0]);
-        System.out.println(fileContents[1]);
 
         for (String tag : fileContents[1].split(TAG_DELIMITER)) {
             tag = tag.trim();
@@ -133,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
+
+        System.out.println("Finished: " + fileContents[0]);
 
         addBtn(fileContents[0]);
     }
