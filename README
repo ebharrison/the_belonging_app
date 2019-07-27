@@ -1,0 +1,9 @@
+Stories are dynamically handled by the app. Currently only text stories are
+supported. 
+To add a new story
+-add the text file to the assets folder
+-Properly name the file. The name of the file will be used for the button name
+  The name of the file should be the story title
+-add the name of the story to the story_list file, or else it will not appear
+
+All stories must have at least one tag
