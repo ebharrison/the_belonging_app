@@ -159,14 +159,4 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             linearLayout.addView(btnShow);
         }
     }
-
-    public boolean isConnected() {
-        try {
-            final String command = "ping -c 1 google.com";
-            return Runtime.getRuntime().exec(command).waitFor() == 0;
-        } catch (Exception e) {
-
-        }
-        return false;
-    }
 }

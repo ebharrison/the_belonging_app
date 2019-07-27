@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">belong</string>
+    <string name="FAIL_INTERNET_CONNECT">Internet connection failed</string>
 </resources>
