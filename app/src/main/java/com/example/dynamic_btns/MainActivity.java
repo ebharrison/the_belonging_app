@@ -33,7 +33,7 @@ import java.util.Vector;
 //todo encode spinner icon to load stories then show gui
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
-    private static final String TAG_DELIMITER = " ";
+    private static final String TAG_DELIMITER = ",";
 
     // constant set to name of file that contains the list of all stories to be read
     private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/story_titles.txt?token=AKOWS3SAUZUFMBA7KUFZZ5K5IOAHK";
@@ -81,16 +81,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
 //      set linearlayout for dynamically created buttons
         linearLayout = findViewById(R.id.rootContainer);
-
-//        Button button = findViewById(R.id.search_button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (String s : fileContents) {
-//                    System.out.println(s + " yay");
-//                }
-//            }
-//        });
     }
 
     public void startNewAsyncTask(String url) {
@@ -131,10 +121,11 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //add story and tags to hashmap
 
         String cur_url = allStoryUrl[indexUrl++];
-        System.out.println(fileContents[0] + " howdy");
-        System.out.println(fileContents[1] + " howdy");
+        System.out.println(fileContents[0]);
+        System.out.println(fileContents[1]);
 
         for (String tag : fileContents[1].split(TAG_DELIMITER)) {
+            tag = tag.trim();
             // if hashmap doesn't contain tag, add tag and initalize array
             if (!storiesAndTags.containsKey(tag))
                 storiesAndTags.put(tag, new ArrayList<String>());
@@ -142,8 +133,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
-
-        System.out.println(fileContents[0] + " was added to table with url " + cur_url);
 
         addBtn(fileContents[0]);
     }
