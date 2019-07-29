@@ -71,15 +71,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         linearLayout = findViewById(R.id.rootContainer);
 
         // connect to internet and load stories
-        startNewAsyncTask(STORY_LIST_URL);
+        startNewAsyncTask(STORY_LIST_URL, 0);
     }
 
-    public void startNewAsyncTask(String url) {
+    public void startNewAsyncTask(String url, int lines) {
         asyncTaskRunning++;
         TextFileReader asyncTask = new TextFileReader();
         //use this to set delegate/listener back to this class
         asyncTask.delegate = MainActivity.this;
-        asyncTask.execute(url);
+        asyncTask.execute(url, lines + "");
     }
 
     public void processFinish(String output) {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         allStoryUrl = fileContents;
         for (String storyUrl : allStoryUrl) {
             //read first two lines of every file to extract the tags and story title
-            startNewAsyncTask(storyUrl);
+            startNewAsyncTask(storyUrl, 2);
         }
         System.out.println("Have all async taks finish?");
     }

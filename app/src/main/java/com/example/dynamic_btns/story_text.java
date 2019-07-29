@@ -27,7 +27,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
 
         Intent i = getIntent();
         String curUrl = i.getStringExtra("curUrl");
-        startNewAsyncTask(curUrl);
+        startNewAsyncTask(curUrl, -2);
 
         Button button = (Button) findViewById(R.id.return_btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -39,11 +39,11 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         });
     }
 
-    public void startNewAsyncTask(String url) {
+    public void startNewAsyncTask(String url, int lines) {
         TextFileReader asyncTask = new TextFileReader();
         //use this to set delegate/listener back to this class
         asyncTask.delegate = story_text.this;
-        asyncTask.execute(url);
+        asyncTask.execute(url, lines + "");
     }
 
     public void processFinish(String output) {
