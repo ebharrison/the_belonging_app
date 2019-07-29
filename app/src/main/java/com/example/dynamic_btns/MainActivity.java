@@ -125,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
-
-        System.out.println("Finished: " + fileContents[0]);
     }
 
     public void checkProgressAsyncTasks() {
