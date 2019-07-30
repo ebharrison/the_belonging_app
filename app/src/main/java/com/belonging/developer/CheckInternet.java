@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class CheckInternet extends AppCompatActivity {
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,11 @@ public class CheckInternet extends AppCompatActivity {
             Intent i = new Intent(CheckInternet.this, MainActivity.class);
             startActivity(i);
         } else {
-            Toast.makeText(getApplicationContext(),
-                    getResources().getString(R.string.FAIL_INTERNET_CONNECT), Toast.LENGTH_SHORT).show();
+            if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
+                toast = Toast.makeText(CheckInternet.this, "Internet connection failed",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 
