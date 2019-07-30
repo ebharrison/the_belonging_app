@@ -1,6 +1,0 @@
-bob,     wet     ,      dry,      fun,boo
-this is the bar file
-hello world
-how are you
-i am a developer
-it is fun
