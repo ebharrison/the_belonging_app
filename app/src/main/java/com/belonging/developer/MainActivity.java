@@ -1,4 +1,4 @@
-package com.example.dynamic_btns;
+package com.belonging.developer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +14,11 @@ import java.util.HashMap;
 
 //TODO STORY TITLE PRECEEDS TAGS
 
-//todo encode spinner icon to load stories then show gui
-
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
     // constant set to name of file that contains the list of all stories to be read
-    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/belonging_app_story_files/master/stories/story_titles.txt?token=AKOWS3SAUZUFMBA7KUFZZ5K5IOAHK";
+    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/story_titles.txt?token=AKOWS3XCEUCIO4DJGPL3B4S5JDIOS";
 
     private LinearLayout linearLayout;
     // used for searching both tags and stories
@@ -106,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             //read first two lines of every file to extract the tags and story title
             startNewAsyncTask(storyUrl, 2);
         }
-        System.out.println("Have all async taks finish?");
     }
 
     private void readStoryData() {

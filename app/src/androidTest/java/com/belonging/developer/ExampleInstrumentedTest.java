@@ -1,4 +1,4 @@
-package com.example.dynamic_btns;
+package com.belonging.developer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.dynamic_btns", appContext.getPackageName());
+        assertEquals("com.com.beloningapp.developer.dynamic_btns", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.dynamic_btns;
+package com.belonging.developer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Set;
 
 
 //todo: bug if query text contains partial tag and then user selects a tag
