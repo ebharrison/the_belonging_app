@@ -12,6 +12,9 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+//todo NOT WORKING BECAUSE NEED TO FIX FILE OF LIST OF STORIES AND URLS
+
 //TODO STORY TITLE PRECEEDS TAGS
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
@@ -113,12 +116,17 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
         String cur_url = allStoryUrl[indexUrl++];
 
-        for (String tag : fileContents[1].split(TAG_DELIMITER)) {
-            tag = tag.trim();
-            // if hashmap doesn't contain tag, add tag and initalize array
-            if (!storiesAndTags.containsKey(tag))
-                storiesAndTags.put(tag, new ArrayList<String>());
-            storiesAndTags.get(tag).add(fileContents[0]);
+        try {
+            for (String tag : fileContents[1].split(TAG_DELIMITER)) {
+                tag = tag.trim();
+                // if hashmap doesn't contain tag, add tag and initalize array
+                if (!storiesAndTags.containsKey(tag))
+                    storiesAndTags.put(tag, new ArrayList<String>());
+                storiesAndTags.get(tag).add(fileContents[0]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Check file of list of stories");
+            e.printStackTrace();
         }
 
         storyToUrl.put(fileContents[0], cur_url);
