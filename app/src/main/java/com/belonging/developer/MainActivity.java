@@ -12,16 +12,16 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
+ */
 
-//todo NOT WORKING BECAUSE NEED TO FIX FILE OF LIST OF STORIES AND URLS
-
-//TODO STORY TITLE PRECEEDS TAGS
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
     // constant set to name of file that contains the list of all stories to be read
-    private static final String STORY_LIST_URL = "https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/story_titles.txt?token=AKOWS3XCEUCIO4DJGPL3B4S5JDIOS";
+    private static final String STORY_LIST = "index";
 
     private LinearLayout linearLayout;
     // used for searching both tags and stories
@@ -72,19 +72,23 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         linearLayout = findViewById(R.id.rootContainer);
 
         // connect to internet and load stories
-        startNewAsyncTask(STORY_LIST_URL, 0);
+        startNewAsyncTask(STORY_LIST, 0);
     }
 
-    public void startNewAsyncTask(String url, int lines) {
+    public void startNewAsyncTask(String url, int num_lines) {
         asyncTaskRunning++;
+
         TextFileReader asyncTask = new TextFileReader();
         //use this to set delegate/listener back to this class
         asyncTask.delegate = MainActivity.this;
-        asyncTask.execute(url, lines + "");
+
+        // need to cast num_lines to string since async task takes multiple string arg
+        asyncTask.execute(url, num_lines + "");
     }
 
     public void processFinish(String output) {
         asyncTaskRunning--;
+
         fileContents = output.split("\n");
         if (!hasStoryListBeenRead) {
             processStories();

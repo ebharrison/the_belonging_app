@@ -10,15 +10,17 @@ import java.net.URL;
 
 public class TextFileReader extends AsyncTask<String, Void, String> {
     private String TextHolder = "", TextHolder2 = "";
-    private URL url;
     private BufferedReader bufferReader;
-
     public AsyncResponse delegate = null;
+
+    private final String GITHUB_DOMAIN = "https://ebharrison.github.io/the_belonging_app/";
+    private final String STORY_FILE_TYPE = ".html";
 
     @Override
     protected String doInBackground(String... params) {
         try {
-            url = new URL(params[0]);
+            //build url from title
+            URL url = buildUrlFromStoryTitle(params[0]);
             bufferReader = new BufferedReader(new InputStreamReader(url.openStream()));
 
             /**
@@ -88,6 +90,23 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         delegate.processFinish(result);
+    }
+
+
+    /**
+     * @param storyTitle is name of story to be read. It matches the file name on github
+     * @return URL object with url for story file
+     */
+    protected URL buildUrlFromStoryTitle(String storyTitle) {
+        URL returnURL = null;
+        String fullUrl = GITHUB_DOMAIN + storyTitle + STORY_FILE_TYPE;
+        try {
+            returnURL = new URL(fullUrl);
+        } catch (MalformedURLException e) {
+            System.out.println("Error: Could not build url for: " + storyTitle);
+            e.printStackTrace();
+        }
+        return returnURL;
     }
 
 }
