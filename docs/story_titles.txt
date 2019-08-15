@@ -1,4 +1,0 @@
-https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/bar.txt?token=AKOWS3SGCMKCLX5EJVKUKXS5JDHY2
-https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/foo.txt?token=AKOWS3WOG4ALTRLLGYRN7R25JDH66
-https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/wet.txt?token=AKOWS3REBZJUYYPMYQ77QZK5JDINC
-https://raw.githubusercontent.com/sensishadow818/the_belonging_app/master/stories/jon.txt?token=AKOWS3TDOO5SJMAB4BPJUBS5JDIC4
