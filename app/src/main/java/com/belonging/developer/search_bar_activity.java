@@ -15,6 +15,9 @@ import java.util.HashMap;
 
 
 //todo: bug if query text contains partial tag and then user selects a tag
+
+//todo: if no story contains tag in search bar, show no story rather than just the tags
+
 public class search_bar_activity extends AppCompatActivity {
     private static final String TAG_DELIMITER = " ";
 
