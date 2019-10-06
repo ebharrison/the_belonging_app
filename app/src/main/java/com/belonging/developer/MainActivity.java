@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
-        storyTitles.add(fileContents[0]);
+//        storyTitles.add(fileContents[0]);
     }
 
     public void checkProgressAsyncTasks() {
@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 //            for (String story : storyToUrl.keySet()) {
 //                addBtn(story);
 //            }
+            storyTitles.addAll(storyToUrl.keySet());
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyTitles);
             listView.setAdapter(adapter);
         }
@@ -163,24 +164,24 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     // Automatically adds a button the current view. It's dimensions match the layout params in the
     // xml file
-    private void addBtn(final String story_name) {
-        // Create Button Dynamically
-        Button btnShow = new Button(MainActivity.this);
-        btnShow.setText(story_name);
-        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        btnShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, story_text.class);
-                i.putExtra("curUrl", storyToUrl.get(story_name));
-                startActivity(i);
-            }
-        });
-
-        // Add Button to LinearLayout
-        if (linearLayout != null) {
-            linearLayout.addView(btnShow);
-        }
-    }
+//    private void addBtn(final String story_name) {
+//        // Create Button Dynamically
+//        Button btnShow = new Button(MainActivity.this);
+//        btnShow.setText(story_name);
+//        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
+//        btnShow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, story_text.class);
+//                i.putExtra("curUrl", storyToUrl.get(story_name));
+//                startActivity(i);
+//            }
+//        });
+//
+//        // Add Button to LinearLayout
+//        if (linearLayout != null) {
+//            linearLayout.addView(btnShow);
+//        }
+//    }
 }
