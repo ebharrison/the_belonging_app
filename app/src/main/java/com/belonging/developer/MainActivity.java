@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private ProgressBar spinner;
 
     private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> storyTitles = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
+        storyTitles.add(fileContents[0]);
     }
 
     public void checkProgressAsyncTasks() {
@@ -147,9 +153,11 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             searchBtn.setVisibility(View.VISIBLE);
             spinner.setVisibility(View.INVISIBLE);
 
-            for (String story : storyToUrl.keySet()) {
-                addBtn(story);
-            }
+//            for (String story : storyToUrl.keySet()) {
+//                addBtn(story);
+//            }
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyTitles);
+            listView.setAdapter(adapter);
         }
     }
 
