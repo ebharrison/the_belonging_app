@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,10 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private int asyncTaskRunning = 0;
 
     private Button searchBtn;
-    private ProgressBar spinner;
+    private ProgressBar loadingSpinner;
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
@@ -54,15 +51,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // create view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         searchBtn = findViewById(R.id.search_button);
+        // only show search button when done loading
         searchBtn.setVisibility(View.INVISIBLE);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {  // change to search activity
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
 
                 Bundle extras = new Bundle();
@@ -74,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        listView = findViewById(R.id.storyList);
+        listView = findViewById(R.id.storyList);  // main list to display all the stories
+        // set listview so when a story is clicked, it takes you to the story page
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,17 +84,16 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        spinner = findViewById(R.id.progressBar);
-
-//      set linearlayout for dynamically created buttons
-        linearLayout = findViewById(R.id.rootContainer);
+        loadingSpinner = findViewById(R.id.progressBar);
 
         // connect to internet and load stories
+        // we begin by reading the index file, or the file with all the story titles
         startNewAsyncTask(STORY_LIST, 0);
     }
 
     public void startNewAsyncTask(String url, int num_lines) {
-        asyncTaskRunning++;
+        asyncTaskRunning++;  // for every running asyncTask, increase the counter to keep track of
+        // the total running
 
         TextFileReader asyncTask = new TextFileReader();
         //use this to set delegate/listener back to this class
@@ -160,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // check for all async tasks finished
         if (asyncTaskRunning == 0) {
             searchBtn.setVisibility(View.VISIBLE);
-            spinner.setVisibility(View.INVISIBLE);
+            loadingSpinner.setVisibility(View.INVISIBLE);
 
 //            for (String story : storyToUrl.keySet()) {
 //                addBtn(story);
