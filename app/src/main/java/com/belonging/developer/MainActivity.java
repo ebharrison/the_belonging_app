@@ -21,7 +21,6 @@ import java.util.List;
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
  */
 
-
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
@@ -155,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
 
         storyToUrl.put(fileContents[0], cur_url);
-//        storyTitles.add(fileContents[0]);
     }
 
     public void checkProgressAsyncTasks() {
@@ -172,27 +170,4 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             listView.setAdapter(adapter);
         }
     }
-
-    // Automatically adds a button the current view. It's dimensions match the layout params in the
-    // xml file
-//    private void addBtn(final String story_name) {
-//        // Create Button Dynamically
-//        Button btnShow = new Button(MainActivity.this);
-//        btnShow.setText(story_name);
-//        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT));
-//        btnShow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, story_text.class);
-//                i.putExtra("curUrl", storyToUrl.get(story_name));
-//                startActivity(i);
-//            }
-//        });
-//
-//        // Add Button to LinearLayout
-//        if (linearLayout != null) {
-//            linearLayout.addView(btnShow);
-//        }
-//    }
 }
