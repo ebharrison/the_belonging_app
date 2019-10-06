@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private Button searchBtn;
     private ProgressBar spinner;
 
+    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // create view
@@ -65,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 startActivity(i);
             }
         });
+
+        listView = findViewById(R.id.storyList);
 
         spinner = findViewById(R.id.progressBar);
 

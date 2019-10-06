@@ -26,7 +26,14 @@
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-220dp"
-        tools:layout_editor_absoluteY="0dp"></LinearLayout>
+        tools:layout_editor_absoluteY="0dp">
+
+        <ListView
+            android:id="@+id/storyList"
+            android:layout_width="match_parent"
+            android:layout_height="605dp"
+            android:layout_margin="10dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_button"
