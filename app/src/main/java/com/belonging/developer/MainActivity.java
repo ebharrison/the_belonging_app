@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -75,6 +76,16 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         });
 
         listView = findViewById(R.id.storyList);
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String user_choice = adapter.getItem(position);
+
+                Intent i = new Intent(MainActivity.this, story_text.class);
+                i.putExtra("curUrl", storyToUrl.get(user_choice));
+                startActivity(i);
+            }
+        });
 
         spinner = findViewById(R.id.progressBar);
 
