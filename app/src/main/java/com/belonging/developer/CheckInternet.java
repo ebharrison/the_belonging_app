@@ -29,6 +29,7 @@ public class CheckInternet extends AppCompatActivity {
     public void changeActivity() {
         if (isConnected()) {
             Intent i = new Intent(CheckInternet.this, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
             if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {

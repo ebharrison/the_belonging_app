@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 //todo: bug if query text contains partial tag and then user selects a tag
 
-//todo: if no story contains tag in search bar, show no story rather than just the tags
+//todo: if no story contains tag in search bar, show nothing
 
 public class search_bar_activity extends AppCompatActivity {
     private static final String TAG_DELIMITER = " ";
@@ -101,6 +101,7 @@ public class search_bar_activity extends AppCompatActivity {
                 } else {
                     //user_choice is an actual story
                     Intent i = new Intent(search_bar_activity.this, story_text.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.putExtra("curUrl", storyToUrl.get(adapter.getItem(position)));
                     startActivity(i);
                 }

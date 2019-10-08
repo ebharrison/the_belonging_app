@@ -13,6 +13,8 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
     private BufferedReader bufferReader;
     public AsyncResponse delegate = null;
 
+
+    //todo: can we make this static?
     private final String GITHUB_DOMAIN = "https://ebharrison.github.io/the_belonging_app/";
     private final String STORY_FILE_TYPE = ".html";
 

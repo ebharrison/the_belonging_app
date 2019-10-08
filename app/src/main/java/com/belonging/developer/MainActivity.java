@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onClick(View v) {  // change to search activity
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
-
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 Bundle extras = new Bundle();
                 extras.putSerializable("STORIES_AND_TAGS", storiesAndTags);
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 String user_choice = adapter.getItem(position);
 
                 Intent i = new Intent(MainActivity.this, story_text.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.putExtra("curUrl", storyToUrl.get(user_choice));
                 startActivity(i);
             }
