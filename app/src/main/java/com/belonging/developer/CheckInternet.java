@@ -9,10 +9,12 @@ import android.widget.Toast;
 
 public class CheckInternet extends AppCompatActivity {
     private Toast toast;
+    private String websiteToPing = "github.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        changeActivity();  // if there is no internet connection, this will fail
+        changeActivity();  // if there is no internet connection, this will do nothing. The rest of
+        // the code block runs
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_internet);
@@ -28,9 +30,12 @@ public class CheckInternet extends AppCompatActivity {
 
     public void changeActivity() {
         if (isConnected()) {
+            // if there is internet, proceed to app
             Intent i = new Intent(CheckInternet.this, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
+            // no internet connection, show error message
             if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
                 toast = Toast.makeText(CheckInternet.this, "Internet connection failed",
                         Toast.LENGTH_SHORT);
@@ -39,13 +44,16 @@ public class CheckInternet extends AppCompatActivity {
         }
     }
 
+    // check for internet connection by pinging website
     public boolean isConnected() {
         try {
-            final String command = "ping -c 1 google.com";
+            // ping github because it holds all the stories. If we can't reach github, we have a
+            // problem
+            final String command = "ping -c 1 " + websiteToPing;
             return Runtime.getRuntime().exec(command).waitFor() == 0;
         } catch (Exception e) {
-
         }
+
         return false;
     }
 }

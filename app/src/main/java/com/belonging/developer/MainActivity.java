@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ import java.util.HashMap;
 /**
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
  */
-
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
@@ -42,21 +43,33 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private int asyncTaskRunning = 0;
 
     private Button searchBtn;
-    private ProgressBar spinner;
+    private ProgressBar loadingSpinner;
+
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> storyTitles = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // create view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         searchBtn = findViewById(R.id.search_button);
+
+        // only show search button when done loading
         searchBtn.setVisibility(View.INVISIBLE);
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {  // change to search activity
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+                // pass data to search activity class
+                // here we pass the hashtable of each story with a specific tag, and each story and
+                // it's url. We used the first one to search for stories via their tags, and the
+                // second when a user clicks on the story to view (the search activity passes it to
+                // the story class)
                 Bundle extras = new Bundle();
                 extras.putSerializable("STORIES_AND_TAGS", storiesAndTags);
                 extras.putSerializable("STORIES_AND_URLS", storyToUrl);
@@ -66,20 +79,39 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        spinner = findViewById(R.id.progressBar);
+        listView = findViewById(R.id.storyList);  // main list to display all the stories
+        // set listview so when a story is clicked, it takes you to the story page
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String user_choice = adapter.getItem(position);
 
-//      set linearlayout for dynamically created buttons
-        linearLayout = findViewById(R.id.rootContainer);
+                Intent i = new Intent(MainActivity.this, story_text.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("curUrl", storyToUrl.get(user_choice));
+                startActivity(i);
+            }
+        });
+
+        loadingSpinner = findViewById(R.id.progressBar);
 
         // connect to internet and load stories
+        // we begin by reading the index file, the file with all the story titles
+        // STORY_LIST is a static url for the the github file with the file names. This has to be
+        // hard coded.
+        // we pass 0 to read the whole file
         startNewAsyncTask(STORY_LIST, 0);
     }
 
     public void startNewAsyncTask(String url, int num_lines) {
-        asyncTaskRunning++;
+        asyncTaskRunning++;  // for every running asyncTask, increase the counter to keep track of
+        // the total running
 
+        // instatiate a new async task
         TextFileReader asyncTask = new TextFileReader();
-        //use this to set delegate/listener back to this class
+
+        // use this to set delegate/listener back to this class, main activity, so when task finished,
+        // it uses the processFinish for this class
         asyncTask.delegate = MainActivity.this;
 
         // need to cast num_lines to string since async task takes multiple string arg
@@ -90,12 +122,17 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         asyncTaskRunning--;
 
         fileContents = output.split("\n");
-        if (!hasStoryListBeenRead) {
+        if (!hasStoryListBeenRead) {  // special boolean flag to if block only runs once, when this
+            // function is first called
+
+            // every call to this function from here on is only reading actual stories
+
             processStories();
             hasStoryListBeenRead = true;
         } else {
             readStoryData();
         }
+
         checkProgressAsyncTasks();
     }
 
@@ -107,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //copy the urls into a new array since we will use the async task again and it will save
         //the new data to fileContents
         allStoryUrl = fileContents;
+
+        // for every file name, read the file on github
         for (String storyUrl : allStoryUrl) {
             //read first two lines of every file to extract the tags and story title
             startNewAsyncTask(storyUrl, 2);
@@ -118,14 +157,21 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //first line is the title, second line is tags
         //add story and tags to hashmap
 
+        // need static counter for index of which url is currently being read because yeah coding
+        // this was the best working solution i could come up with
         String cur_url = allStoryUrl[indexUrl++];
 
         try {
+            // first analyze the tags for the story
             for (String tag : fileContents[1].split(TAG_DELIMITER)) {
-                tag = tag.trim();
+                tag = tag.trim();  // clean each tag
+
                 // if hashmap doesn't contain tag, add tag and initalize array
                 if (!storiesAndTags.containsKey(tag))
                     storiesAndTags.put(tag, new ArrayList<String>());
+
+                // for every tag in the hashmap, it corresponds to an arraylist of stories with said
+                // tag
                 storiesAndTags.get(tag).add(fileContents[0]);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -133,41 +179,20 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             e.printStackTrace();
         }
 
+        // build hash map of story title -> story url
         storyToUrl.put(fileContents[0], cur_url);
     }
 
     public void checkProgressAsyncTasks() {
         // check for all async tasks finished
-        if (asyncTaskRunning == 0) {
+        if (asyncTaskRunning == 0) {  // true if no tasks running
+
             searchBtn.setVisibility(View.VISIBLE);
-            spinner.setVisibility(View.INVISIBLE);
+            loadingSpinner.setVisibility(View.INVISIBLE);
 
-            for (String story : storyToUrl.keySet()) {
-                addBtn(story);
-            }
-        }
-    }
-
-    // Automatically adds a button the current view. It's dimensions match the layout params in the
-    // xml file
-    private void addBtn(final String story_name) {
-        // Create Button Dynamically
-        Button btnShow = new Button(MainActivity.this);
-        btnShow.setText(story_name);
-        btnShow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        btnShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, story_text.class);
-                i.putExtra("curUrl", storyToUrl.get(story_name));
-                startActivity(i);
-            }
-        });
-
-        // Add Button to LinearLayout
-        if (linearLayout != null) {
-            linearLayout.addView(btnShow);
+            storyTitles.addAll(storyToUrl.keySet());
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyTitles);
+            listView.setAdapter(adapter);
         }
     }
 }

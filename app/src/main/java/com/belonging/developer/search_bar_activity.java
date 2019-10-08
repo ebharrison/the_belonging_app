@@ -13,10 +13,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+// todo: BUTTON BACK TO MAIN STORY PAGE
 
 //todo: bug if query text contains partial tag and then user selects a tag
 
-//todo: if no story contains tag in search bar, show no story rather than just the tags
+//todo: if no story contains tag in search bar, show nothing
 
 public class search_bar_activity extends AppCompatActivity {
     private static final String TAG_DELIMITER = " ";
@@ -101,6 +102,7 @@ public class search_bar_activity extends AppCompatActivity {
                 } else {
                     //user_choice is an actual story
                     Intent i = new Intent(search_bar_activity.this, story_text.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.putExtra("curUrl", storyToUrl.get(adapter.getItem(position)));
                     startActivity(i);
                 }
@@ -129,10 +131,6 @@ public class search_bar_activity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(search_bar_activity.this,
                 android.R.layout.simple_list_item_1, newList);
         listView.setAdapter(adapter);
-    }
-
-    private boolean isEmpty(ArrayAdapter<String> adapter) {
-        return adapter.getItem(0) != null;
     }
 
     private ArrayList<String> sort(ArrayList<String> list) {

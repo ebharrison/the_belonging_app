@@ -29,6 +29,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(story_text.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });
