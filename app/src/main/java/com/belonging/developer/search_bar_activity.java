@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+// todo: BUTTON BACK TO MAIN STORY PAGE
 
 //todo: bug if query text contains partial tag and then user selects a tag
 
@@ -130,10 +131,6 @@ public class search_bar_activity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(search_bar_activity.this,
                 android.R.layout.simple_list_item_1, newList);
         listView.setAdapter(adapter);
-    }
-
-    private boolean isEmpty(ArrayAdapter<String> adapter) {
-        return adapter.getItem(0) != null;
     }
 
     private ArrayList<String> sort(ArrayList<String> list) {

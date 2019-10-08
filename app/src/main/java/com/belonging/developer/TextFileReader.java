@@ -40,14 +40,16 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
                 readLines = Integer.parseInt(params[1]);
 
                 if (readLines > 0) {
-                    // num of lines to read is positive, so read readLines amount of lines and return
+                    // num of lines to read is positive, so read num amount of lines and return what
+                    // was read
                     for (int i = 0; i < readLines; i++) {
                         TextHolder2 = bufferReader.readLine();
                         TextHolder += TextHolder2 + "\n";
                     }
                 } else {
-                    //if negative number, or 0, then we can  discard the first readLines amount of
-                    //lines
+                    // if negative number, or 0, then we can  discard the first num amount of
+                    // lines
+                    // if 0, then no lines discarded :)
                     for (int i = 0; i < Math.abs(readLines); i++) {
                         TextHolder2 = bufferReader.readLine();
                     }
@@ -73,6 +75,7 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
 
     }
 
+    // read entire contents of the file given in the above code block
     private void readFile() {
         try {
             TextHolder2 = bufferReader.readLine();

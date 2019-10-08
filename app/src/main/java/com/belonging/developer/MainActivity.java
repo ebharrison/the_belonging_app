@@ -55,14 +55,21 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         setContentView(R.layout.activity_main);
 
         searchBtn = findViewById(R.id.search_button);
+
         // only show search button when done loading
         searchBtn.setVisibility(View.INVISIBLE);
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {  // change to search activity
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+                // pass data to search activity class
+                // here we pass the hashtable of each story with a specific tag, and each story and
+                // it's url. We used the first one to search for stories via their tags, and the
+                // second when a user clicks on the story to view (the search activity passes it to
+                // the story class)
                 Bundle extras = new Bundle();
                 extras.putSerializable("STORIES_AND_TAGS", storiesAndTags);
                 extras.putSerializable("STORIES_AND_URLS", storyToUrl);
@@ -89,7 +96,10 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         loadingSpinner = findViewById(R.id.progressBar);
 
         // connect to internet and load stories
-        // we begin by reading the index file, or the file with all the story titles
+        // we begin by reading the index file, the file with all the story titles
+        // STORY_LIST is a static url for the the github file with the file names. This has to be
+        // hard coded.
+        // we pass 0 to read the whole file
         startNewAsyncTask(STORY_LIST, 0);
     }
 
@@ -97,8 +107,11 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         asyncTaskRunning++;  // for every running asyncTask, increase the counter to keep track of
         // the total running
 
+        // instatiate a new async task
         TextFileReader asyncTask = new TextFileReader();
-        //use this to set delegate/listener back to this class
+
+        // use this to set delegate/listener back to this class, main activity, so when task finished,
+        // it uses the processFinish for this class
         asyncTask.delegate = MainActivity.this;
 
         // need to cast num_lines to string since async task takes multiple string arg
@@ -109,12 +122,17 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         asyncTaskRunning--;
 
         fileContents = output.split("\n");
-        if (!hasStoryListBeenRead) {
+        if (!hasStoryListBeenRead) {  // special boolean flag to if block only runs once, when this
+            // function is first called
+
+            // every call to this function from here on is only reading actual stories
+
             processStories();
             hasStoryListBeenRead = true;
         } else {
             readStoryData();
         }
+
         checkProgressAsyncTasks();
     }
 
@@ -126,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //copy the urls into a new array since we will use the async task again and it will save
         //the new data to fileContents
         allStoryUrl = fileContents;
+
+        // for every file name, read the file on github
         for (String storyUrl : allStoryUrl) {
             //read first two lines of every file to extract the tags and story title
             startNewAsyncTask(storyUrl, 2);
@@ -137,14 +157,21 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         //first line is the title, second line is tags
         //add story and tags to hashmap
 
+        // need static counter for index of which url is currently being read because yeah coding
+        // this was the best working solution i could come up with
         String cur_url = allStoryUrl[indexUrl++];
 
         try {
+            // first analyze the tags for the story
             for (String tag : fileContents[1].split(TAG_DELIMITER)) {
-                tag = tag.trim();
+                tag = tag.trim();  // clean each tag
+
                 // if hashmap doesn't contain tag, add tag and initalize array
                 if (!storiesAndTags.containsKey(tag))
                     storiesAndTags.put(tag, new ArrayList<String>());
+
+                // for every tag in the hashmap, it corresponds to an arraylist of stories with said
+                // tag
                 storiesAndTags.get(tag).add(fileContents[0]);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -152,18 +179,17 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             e.printStackTrace();
         }
 
+        // build hash map of story title -> story url
         storyToUrl.put(fileContents[0], cur_url);
     }
 
     public void checkProgressAsyncTasks() {
         // check for all async tasks finished
-        if (asyncTaskRunning == 0) {
+        if (asyncTaskRunning == 0) {  // true if no tasks running
+
             searchBtn.setVisibility(View.VISIBLE);
             loadingSpinner.setVisibility(View.INVISIBLE);
 
-//            for (String story : storyToUrl.keySet()) {
-//                addBtn(story);
-//            }
             storyTitles.addAll(storyToUrl.keySet());
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyTitles);
             listView.setAdapter(adapter);
