@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             public void onClick(View v) {  // change to search activity
                 Intent i = new Intent(MainActivity.this, search_bar_activity.class);
 
+
                 Bundle extras = new Bundle();
                 extras.putSerializable("STORIES_AND_TAGS", storiesAndTags);
                 extras.putSerializable("STORIES_AND_URLS", storyToUrl);
