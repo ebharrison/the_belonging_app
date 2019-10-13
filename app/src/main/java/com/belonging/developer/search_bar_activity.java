@@ -53,6 +53,7 @@ public class search_bar_activity extends AppCompatActivity {
         });
 
         final SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setBackgroundColor(Color.LTGRAY);
         listView = (ListView) findViewById(R.id.myList);
         listView.setBackgroundColor(Color.LTGRAY);
 

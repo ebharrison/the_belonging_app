@@ -33,6 +33,7 @@
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         android:text="@android:string/search_go"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rootContainer" />
 

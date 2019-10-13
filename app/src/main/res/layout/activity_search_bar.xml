@@ -15,6 +15,7 @@
         android:layout_width="361dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:background="#00BEB7B7"
         android:iconifiedByDefault="false"
         android:queryHint="Search here"
         app:layout_constraintTop_toTopOf="parent"></SearchView>
@@ -23,6 +24,7 @@
         android:id="@+id/returnBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
         android:text="Home" />
 
     <ListView
