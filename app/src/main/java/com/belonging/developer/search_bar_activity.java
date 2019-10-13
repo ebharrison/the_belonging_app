@@ -1,6 +1,7 @@
 package com.belonging.developer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,7 @@ public class search_bar_activity extends AppCompatActivity {
 
         final SearchView searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.myList);
+        listView.setBackgroundColor(Color.LTGRAY);
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();
@@ -69,7 +71,7 @@ public class search_bar_activity extends AppCompatActivity {
         }
         storiesAndTags = sort(storiesAndTags);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+        adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout,
                 storiesAndTags);
         listView.setAdapter(adapter);
 
@@ -140,7 +142,7 @@ public class search_bar_activity extends AppCompatActivity {
     private void setAdapterTo(ArrayList<String> newList) {
         newList = sort(newList);
         adapter = new ArrayAdapter<String>(search_bar_activity.this,
-                android.R.layout.simple_list_item_1, newList);
+                R.layout.listrow, R.id.rowLayout, newList);
         listView.setAdapter(adapter);
     }
 
