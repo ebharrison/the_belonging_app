@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
+
     tools:context=".MainActivity">
+
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="348dp"
-        android:layout_height="wrap_content"
+        android:layout_width="361dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
         android:queryHint="Search here"

@@ -1,6 +1,7 @@
 package com.belonging.developer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
         listView = findViewById(R.id.storyList);  // main list to display all the stories
         // set listview so when a story is clicked, it takes you to the story page
+
+        listView.setBackgroundColor(Color.LTGRAY);
+
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -191,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             loadingSpinner.setVisibility(View.INVISIBLE);
 
             storyTitles.addAll(storyToUrl.keySet());
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyTitles);
+            adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, storyTitles);
             listView.setAdapter(adapter);
         }
     }
