@@ -1,6 +1,7 @@
 package com.belonging.developer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +48,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         story_box.setText(output);
+        story_box.setTextColor(Color.WHITE);
 
         // Add textview to LinearLayout
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
