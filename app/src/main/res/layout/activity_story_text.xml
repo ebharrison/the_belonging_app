@@ -17,7 +17,8 @@
         android:layout_marginBottom="16dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/custom_button" />
 
     <!--<LinearLayout-->
     <!--android:layout_width="fill_parent"-->
