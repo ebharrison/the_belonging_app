@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/customshape"
     tools:context=".MainActivity">
 
     <!-- Primary used for buttons -->
@@ -32,6 +33,7 @@
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         android:text="@android:string/search_go"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rootContainer" />
 

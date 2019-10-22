@@ -5,6 +5,7 @@
     android:id="@+id/story_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/customshape"
     tools:context=".story_text">
 
     <Button
@@ -16,7 +17,8 @@
         android:layout_marginBottom="16dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/custom_button" />
 
     <!--<LinearLayout-->
     <!--android:layout_width="fill_parent"-->
@@ -28,11 +30,11 @@
     <!--app:layout_constraintStart_toStartOf="parent"-->
     <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/rootContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical" />
 
 </android.support.constraint.ConstraintLayout>

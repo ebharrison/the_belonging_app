@@ -1,11 +1,13 @@
 package com.belonging.developer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -40,8 +42,20 @@ public class search_bar_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
 
+        Button returnBtn = (Button) findViewById(R.id.returnBtn);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {  // change to search activity
+                Intent i = new Intent(search_bar_activity.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
         final SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setBackgroundColor(Color.LTGRAY);
         listView = (ListView) findViewById(R.id.myList);
+        listView.setBackgroundColor(Color.LTGRAY);
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();
@@ -58,7 +72,7 @@ public class search_bar_activity extends AppCompatActivity {
         }
         storiesAndTags = sort(storiesAndTags);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+        adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout,
                 storiesAndTags);
         listView.setAdapter(adapter);
 
@@ -129,7 +143,7 @@ public class search_bar_activity extends AppCompatActivity {
     private void setAdapterTo(ArrayList<String> newList) {
         newList = sort(newList);
         adapter = new ArrayAdapter<String>(search_bar_activity.this,
-                android.R.layout.simple_list_item_1, newList);
+                R.layout.listrow, R.id.rowLayout, newList);
         listView.setAdapter(adapter);
     }
 

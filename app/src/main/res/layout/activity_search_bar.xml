@@ -6,21 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
+    android:background="@drawable/customshape"
     tools:context=".MainActivity">
+
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="361dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:background="#00BEB7B7"
         android:iconifiedByDefault="false"
         android:queryHint="Search here"
         app:layout_constraintTop_toTopOf="parent"></SearchView>
 
+    <Button
+        android:id="@+id/returnBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:text="Home" />
+
     <ListView
         android:id="@+id/myList"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintTop_toTopOf="@+id/searchView"
         tools:layout_editor_absoluteX="16dp"></ListView>
