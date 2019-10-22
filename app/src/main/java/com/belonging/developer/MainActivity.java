@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
             storyTitles.addAll(storyToUrl.keySet());
             adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, storyTitles);
+
             listView.setAdapter(adapter);
         }
     }
