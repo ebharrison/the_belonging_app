@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +19,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,6 +117,29 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         startNewAsyncTask(STORY_LIST, 0);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_select, menu);
+        return true;
+    }
+
+    // Connect the Settings menu item to activity_setting
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.myProfile:
+                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT);
+                return true;
+            case R.id.setting:
+                Intent intent = new Intent(MainActivity.this, setting_activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.history:
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public void startNewAsyncTask(String url, int num_lines) {
         asyncTaskRunning++;  // for every running asyncTask, increase the counter to keep track of
