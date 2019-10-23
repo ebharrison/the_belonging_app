@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
+
         loadingSpinner = findViewById(R.id.progressBar);
 
         // connect to internet and load stories
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // we pass 0 to read the whole file
         startNewAsyncTask(STORY_LIST, 0);
     }
+
 
     public void startNewAsyncTask(String url, int num_lines) {
         asyncTaskRunning++;  // for every running asyncTask, increase the counter to keep track of
