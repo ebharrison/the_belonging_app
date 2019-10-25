@@ -7,13 +7,13 @@
         android:title="My profile"
         app:showAsAction="never" />
 
-    <item android:id="@+id/setting"
+    <item android:id="@+id/about"
         android:icon="@drawable/menu_bar"
-        android:title="Setting"
+        android:title="About"
         app:showAsAction="never" />
 
     <item android:id="@+id/history"
         android:icon="@drawable/menu_bar"
-        android:title="History"
+        android:title="Setting"
         app:showAsAction="never" />
 </menu>
