@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.myProfile:
-                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.about:
+//            case R.id.myProfile:
+//                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
+//                return true;
+            case R.id.About:
                 Intent intent = new Intent(MainActivity.this, about_activity.class);
                 startActivity(intent);
                 return true;
-            case R.id.history:
+            case R.id.Resources:
                 Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
                 return true;
             default:
