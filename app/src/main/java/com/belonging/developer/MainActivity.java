@@ -129,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 startActivity(intent);
                 return true;
             case R.id.history:
-
+                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

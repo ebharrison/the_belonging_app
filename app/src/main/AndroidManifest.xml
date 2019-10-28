@@ -24,6 +24,7 @@
         <activity android:name="com.belonging.developer.MainActivity" />
         <activity android:name="com.belonging.developer.story_text" />
         <activity android:name="com.belonging.developer.search_bar_activity" />
+        <activity android:name="com.belonging.developer.about_activity" />
     </application>
 
 </manifest>
