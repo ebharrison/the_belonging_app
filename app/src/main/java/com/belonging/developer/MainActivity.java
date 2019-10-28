@@ -1,12 +1,11 @@
 package com.belonging.developer;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,8 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             }
         });
 
+
         loadingSpinner = findViewById(R.id.progressBar);
 
         // connect to internet and load stories
@@ -110,6 +109,30 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // hard coded.
         // we pass 0 to read the whole file
         startNewAsyncTask(STORY_LIST, 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_select, menu);
+        return true;
+    }
+
+    // Connect the Settings menu item to activity_about
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.myProfile:
+                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.about:
+                Intent intent = new Intent(MainActivity.this, about_activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.history:
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void startNewAsyncTask(String url, int num_lines) {
