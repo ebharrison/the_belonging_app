@@ -22,6 +22,9 @@ import java.util.HashMap;
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
  */
 
+// change menu icon
+//https://stackoverflow.com/questions/26300480/how-to-change-option-menu-icon-in-the-action-bar
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
