@@ -19,7 +19,7 @@
 
         <ListView
             android:id="@+id/storyList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollingCache="true"
             android:smoothScrollbar="true"

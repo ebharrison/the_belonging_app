@@ -25,6 +25,10 @@ import java.util.HashMap;
 // change menu icon
 //https://stackoverflow.com/questions/26300480/how-to-change-option-menu-icon-in-the-action-bar
 
+// Have option to change story text size
+
+
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 startActivity(intent);
                 return true;
             case R.id.Resources:
-                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "This will contain important resources", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
