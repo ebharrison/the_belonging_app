@@ -22,6 +22,13 @@ import java.util.HashMap;
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
  */
 
+// change menu icon
+//https://stackoverflow.com/questions/26300480/how-to-change-option-menu-icon-in-the-action-bar
+
+// Have option to change story text size
+
+
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG_DELIMITER = ",";
 
@@ -121,15 +128,16 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.myProfile:
-                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.about:
+//            case R.id.myProfile:
+//                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
+//                return true;
+            case R.id.About:
                 Intent intent = new Intent(MainActivity.this, about_activity.class);
                 startActivity(intent);
                 return true;
-            case R.id.history:
-
+            case R.id.Resources:
+                Toast.makeText(this, "This will contain important resources", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

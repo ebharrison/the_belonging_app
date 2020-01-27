@@ -50,7 +50,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         story_box.setText(output);
 
         story_box.setTextColor(Color.WHITE);
-        story_box.setTextSize(15);
+        story_box.setTextSize(TEXT_SIZE);
         story_box.setHighlightColor(Color.BLUE);
         int padding = 10;
         story_box.setPadding(padding, padding, padding, padding);

@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/myProfile"
-        android:icon="@drawable/menu_bar"
-        android:title="My profile"
-        app:showAsAction="never" />
+<!--    To change intents and what each menu option does, go to MainActivity, and find onOptionsItemSelected
+        https://developer.android.com/guide/topics/ui/menus#java-->
 
-    <item android:id="@+id/about"
+    <item
+        android:id="@+id/About"
         android:icon="@drawable/menu_bar"
         android:title="About"
         app:showAsAction="never" />
 
-    <item android:id="@+id/history"
+    <item
+        android:id="@+id/Resources"
         android:icon="@drawable/menu_bar"
-        android:title="Setting"
+        android:title="Resources"
         app:showAsAction="never" />
 </menu>

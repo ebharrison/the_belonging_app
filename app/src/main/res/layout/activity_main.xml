@@ -19,26 +19,28 @@
 
         <ListView
             android:id="@+id/storyList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="584dp"
+            android:layout_margin="10dp"
             android:scrollingCache="true"
-            android:smoothScrollbar="true"
-            android:layout_margin="10dp" />
+            android:smoothScrollbar="true" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="145dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_button"
         android:padding="10dp"
         android:text="@android:string/search_go"
-        android:background="@drawable/custom_button"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rootContainer" />
+        app:layout_constraintEnd_toEndOf="@+id/rootContainer"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
