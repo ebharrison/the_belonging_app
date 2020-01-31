@@ -28,7 +28,7 @@ contribution process yet.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Our version control system is [Git](https://github.com/), please find our repositiory [here (https://github.com/ebharrison/the_belonging_app)
 
 ## Authors
 
