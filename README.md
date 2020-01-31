@@ -11,7 +11,7 @@ Presently, the app only runs on Anroid devices. In the future, we will support I
 
 ### Installing
 
-TBD
+While we are still under developement, there is no official release. If you would like a demo of the most recent stable build, please sent an email to <belonging@ucdavis.edu>. You will receive an automatic reply with the latest version.
 
 ## Deployment
 
