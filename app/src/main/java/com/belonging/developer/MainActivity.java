@@ -132,11 +132,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 //                Toast.makeText(this, "TO_DO", Toast.LENGTH_SHORT).show();
 //                return true;
             case R.id.About:
-                Intent intent = new Intent(MainActivity.this, about_activity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(MainActivity.this, about_activity.class);
+                startActivity(intent1);
                 return true;
             case R.id.Resources:
-                Toast.makeText(this, "This will contain important resources", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(MainActivity.this, resources_activity.class);
+                startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
