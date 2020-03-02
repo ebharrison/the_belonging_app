@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.lang.Math.*;
 
 
 public class story_text extends AppCompatActivity implements AsyncResponse {
@@ -16,8 +18,9 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
     private static final int TEXT_SIZE = 20;
     private TextView story_box;
 
-    private static final int MAX_SIZE = 
-    private static final int MIN_SIZE =
+    private static final int SIZE_CHANGE = 2;
+    private static final int MAX_SIZE = 30;
+    private static final int MIN_SIZE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                story_box.setTextSize(story_box.getTextSize()+10);
+                story_box.setTextSize(Math.min(story_box.getTextSize()+SIZE_CHANGE,MAX_SIZE));
             }
         });
 
@@ -50,7 +53,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                story_box.setTextSize(story_box.getTextSize()-10);
+                story_box.setTextSize(Math.max(story_box.getTextSize()-SIZE_CHANGE,MIN_SIZE));
             }
         });
     }
@@ -73,6 +76,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         story_box.setHighlightColor(Color.BLUE);
         int padding = 10;
         story_box.setPadding(padding, padding, padding, padding);
+        story_box.setMovementMethod(new ScrollingMovementMethod());
 
         // Add textview to LinearLayout
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
