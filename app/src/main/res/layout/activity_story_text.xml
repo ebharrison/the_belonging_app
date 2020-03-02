@@ -5,30 +5,42 @@
     android:id="@+id/story_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/customshape"
     tools:context=".story_text">
 
     <Button
         android:id="@+id/return_btn"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/increaseSizeButton"
+        app:layout_constraintStart_toEndOf="@+id/decreaseSizeButton" />
+
+    <Button
+        android:id="@+id/increaseSizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Back"
+        android:background="@drawable/custom_button"
+        android:text="Increase"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/custom_button" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:gravity="center"-->
-    <!--android:padding="10dp"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <Button
+        android:id="@+id/decreaseSizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button"
+        android:text="Decrease"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rootContainer" />
+
 
     <LinearLayout
         android:id="@+id/rootContainer"
