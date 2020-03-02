@@ -16,6 +16,9 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
     private static final int TEXT_SIZE = 20;
     private TextView story_box;
 
+    private static final int MAX_SIZE = 
+    private static final int MIN_SIZE =
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,22 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
                 Intent i = new Intent(story_text.this, MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
+            }
+        });
+
+        Button increase = (Button) findViewById(R.id.increaseSizeButton);
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                story_box.setTextSize(story_box.getTextSize()+10);
+            }
+        });
+
+        Button decrease = (Button) findViewById(R.id.decreaseSizeButton);
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                story_box.setTextSize(story_box.getTextSize()-10);
             }
         });
     }
