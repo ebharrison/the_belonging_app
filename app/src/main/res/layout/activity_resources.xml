@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".resources_activity">
 
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -21,9 +26,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView"
         android:layout_width="318dp"
-        android:layout_height="296dp"
+        android:layout_height="360dp"
         android:layout_marginStart="33dp"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="16dp"
@@ -33,7 +38,8 @@
         android:maxLines="15"
         android:text="UC DAVIS POLICE (Non-Emergency) &amp;
         CAMPUS ESCORT SERVICE \n 530-752-COPS(2677) \n \n CAMPUS EMERGENCY STATUS LINE
-        \n 530-752-4000 \n \n REPORT AND EMERGENCY \n DIAL 911 \n (From a cell, 530-752-1230) \n \n COUNSELING SERVICES \n 530-752-2349"
+        \n 530-752-4000 \n \n REPORT AND EMERGENCY \n DIAL 911 \n (From a cell, 530-752-1230) \n \n COUNSELING SERVICES \n 530-752-2349
+        \n \n Click for more info"
         android:textColor="#2C2C2F"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
