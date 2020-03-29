@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.belonging.developer.CheckInternet">
+        <activity android:name=".resources_activity" />
+        <activity android:name=".CheckInternet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.belonging.developer.MainActivity" />
-        <activity android:name="com.belonging.developer.story_text" />
-        <activity android:name="com.belonging.developer.search_bar_activity" />
-        <activity android:name="com.belonging.developer.about_activity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".story_text" />
+        <activity android:name=".search_bar_activity" />
+        <activity android:name=".about_activity" />
     </application>
 
 </manifest>

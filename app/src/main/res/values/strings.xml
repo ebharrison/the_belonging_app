@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">UC Davis Belongs: You Belong Here</string>
     <string name="FAIL_INTERNET_CONNECT">Internet connection failed</string>
+    <string name="linkToSite">
+        <a href="https://www.ucdavis.edu/">Visit the site for more info</a>
+    </string>
 </resources>
