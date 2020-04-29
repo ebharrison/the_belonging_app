@@ -8,39 +8,45 @@
     tools:context=".MainActivity">
 
     <!-- Primary used for buttons -->
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_button"
+        android:padding="10dp"
+        android:text="About"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/search_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rootContainer"
+        app:layout_constraintVertical_bias="1.0" />
+
     <LinearLayout
         android:id="@+id/rootContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="545dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-220dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintBottom_toTopOf="@+id/search_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
             android:id="@+id/storyList"
             android:layout_width="match_parent"
-            android:layout_height="584dp"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:scrollingCache="true"
             android:smoothScrollbar="true" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="145dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_button"
-        android:padding="10dp"
-        android:text="@android:string/search_go"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rootContainer"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -55,5 +61,42 @@
         app:layout_constraintEnd_toEndOf="@+id/rootContainer"
         app:layout_constraintStart_toStartOf="@+id/rootContainer"
         app:layout_constraintTop_toTopOf="@+id/rootContainer" />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_button"
+        android:padding="10dp"
+        android:text="@android:string/search_go"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_button"
+        android:padding="10dp"
+        android:text="Resources"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/search_button"
+        app:layout_constraintTop_toBottomOf="@+id/rootContainer"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
