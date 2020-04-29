@@ -31,7 +31,7 @@ public class CheckInternet extends AppCompatActivity {
     public void changeActivity() {
         if (isConnected()) {
             // if there is internet, proceed to app
-            Intent i = new Intent(CheckInternet.this, MainActivity.class);
+            Intent i = new Intent(CheckInternet.this, LandingPage.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {

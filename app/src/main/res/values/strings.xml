@@ -4,4 +4,5 @@
     <string name="linkToSite">
         <a href="https://www.ucdavis.edu/">Visit the site for more info</a>
     </string>
+    <string name="title_activity_landing_page">LandingPage</string>
 </resources>
