@@ -13,13 +13,14 @@ public class CheckInternet extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("Checking internet");
         changeActivity();  // if there is no internet connection, this will do nothing. The rest of
         // the code block runs
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_internet);
 
-        Button btn = (Button) findViewById(R.id.retryBtn);
+        Button btn = findViewById(R.id.retryBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,10 +32,12 @@ public class CheckInternet extends AppCompatActivity {
     public void changeActivity() {
         if (isConnected()) {
             // if there is internet, proceed to app
+            System.out.println("internet connected, proceeding");
             Intent i = new Intent(CheckInternet.this, LandingPage.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
+            System.out.println("no internet");
             // no internet connection, show error message
             if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
                 toast = Toast.makeText(CheckInternet.this, "Internet connection failed",
