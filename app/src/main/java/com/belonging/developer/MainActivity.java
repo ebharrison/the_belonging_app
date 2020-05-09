@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     private Button searchBtn;
     private ProgressBar loadingSpinner;
+    private Button aboutBtn;
+    private Button resourcesBtn;
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
@@ -89,6 +91,30 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 startActivity(i);
             }
         });
+
+        aboutBtn = findViewById(R.id.aboutButton);
+        aboutBtn.setVisibility(View.INVISIBLE);
+        aboutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {  // change to search activity
+                Intent i = new Intent(MainActivity.this, about_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
+        resourcesBtn = findViewById(R.id.resoucesButton);
+        resourcesBtn.setVisibility(View.INVISIBLE);
+        resourcesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {  // change to search activity
+                Intent i = new Intent(MainActivity.this, resources_activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
+
 
         listView = findViewById(R.id.storyList);  // main list to display all the stories
         // set listview so when a story is clicked, it takes you to the story page
@@ -229,6 +255,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         if (asyncTaskRunning == 0) {  // true if no tasks running
 
             searchBtn.setVisibility(View.VISIBLE);
+            aboutBtn.setVisibility(View.VISIBLE);
+            resourcesBtn.setVisibility(View.VISIBLE);
             loadingSpinner.setVisibility(View.INVISIBLE);
 
             storyTitles.addAll(storyToUrl.keySet());

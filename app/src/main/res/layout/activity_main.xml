@@ -10,7 +10,7 @@
     <!-- Primary used for buttons -->
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,14 +70,14 @@
         android:text="@android:string/search_go"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/resoucesButton"
         app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/aboutButton"
         app:layout_constraintTop_toBottomOf="@+id/rootContainer"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/resoucesButton"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
         android:layout_marginTop="39dp"
