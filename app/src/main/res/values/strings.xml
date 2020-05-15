@@ -5,4 +5,25 @@
         <a href="https://www.ucdavis.edu/">Visit the site for more info</a>
     </string>
     <string name="title_activity_landing_page">LandingPage</string>
+    <string name="about_page">
+       <b>Problem:</b> \n
+        With over 30,000 undergraduate students at UC Davis, it can be difficult to fit in. There are so many people, and students easily feel like they are lost in the crowds.\n\n
+        <b>Solution:</b> \n
+        An app, where students could read stories about previous students’ experiences​.
+        (to present the experiences of current students, in written, audio, and video formats, to new students entering UC Davis)\n\n
+        <b>Goal:</b> \n
+        Our goal was to create a convenient, effective, and stream-lined option to share the belonging stories with students.\n\n
+    </string>
+    <string name="credits">
+        <b>Credits</b>
+    </string>
+    <string name="citris">
+          CITRIS and the Banatao Institute
+    </string>
+    <string name="kali">
+        Kali Trzesniewski
+    </string>
+    <string name="susan">
+        \n Susan Ebeler
+    </string>
 </resources>
