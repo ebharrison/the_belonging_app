@@ -32,7 +32,7 @@ public class resources_activity extends AppCompatActivity {
             @Override
             public void onClick(@NonNull View widget) {
                 Toast.makeText(resources_activity.this, "success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ucdavis.edu/"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://ebeler.faculty.ucdavis.edu/resources/faq-student-resources/"));
                 startActivity(intent);
             }
         };
