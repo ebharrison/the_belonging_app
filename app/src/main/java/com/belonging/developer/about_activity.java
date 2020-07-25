@@ -2,6 +2,7 @@ package com.belonging.developer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class about_activity extends AppCompatActivity {
@@ -12,5 +13,8 @@ public class about_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+//        ImageView iv = (ImageView) findViewById(R.id.v);
+//        iv.setImageResource(R.drawable.citris_logo);
     }
 }

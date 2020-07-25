@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
 
 public class TextFileReader extends AsyncTask<String, Void, String> {
     private String TextHolder = "", TextHolder2 = "";
@@ -71,8 +72,20 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
             iOException.printStackTrace();
             TextHolder = iOException.toString();
         }
-        return TextHolder;
 
+        int start = TextHolder.indexOf("<body>")+("<body>".length());
+        int end = TextHolder.indexOf("</body>");
+        String clean = TextHolder.substring(start,end).trim();
+        System.out.println("ASYNC:"+clean);
+        if(isAlphaNumeric(clean)) {
+            return clean;
+        } else {
+            return "";
+        }
+    }
+
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && !s.matches("^[<>]*$");
     }
 
     // read entire contents of the file given in the above code block
