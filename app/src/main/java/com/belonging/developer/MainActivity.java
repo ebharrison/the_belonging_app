@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // for every file name, read the file on github
         for (String storyUrl : allStoryUrl) {
             //read first two lines of every file to extract the tags and story title
-            startNewAsyncTask(storyUrl, 2);
+            startNewAsyncTask(storyUrl, 0);
         }
     }
 
