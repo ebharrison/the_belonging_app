@@ -47,6 +47,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical" />
+        android:layout_marginBottom="60dp"
+        android:ellipsize="marquee"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TITLE" />
+
+        <TextView
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STORY_TAGS" />
+
+        <TextView
+            android:id="@+id/STORY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:ellipsize="marquee"
+            android:text="STORY_CONTENTS" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
