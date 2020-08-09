@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,11 +17,15 @@ import java.lang.Math.*;
 public class story_text extends AppCompatActivity implements AsyncResponse {
     // default text size for textview used to show story
     private static final int TEXT_SIZE = 20;
+    private static final int PADDING = 10;
+
     private TextView story_box;
+    private TextView title_box;
+    private TextView tags_box;
 
     private static final int SIZE_CHANGE = 2;
     private static final int MAX_SIZE = 30;
-    private static final int MIN_SIZE = 10;
+    private static final int MIN_SIZE = TEXT_SIZE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,22 +71,46 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
     }
 
     public void processFinish(String output) {
-        story_box = new TextView(this);
-        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        story_box.setText(output);
+        String[] storyParts = output.split("\n");
+
+        // Format title
+        title_box = findViewById(R.id.title);
+        title_box.setText(storyParts[0]);
+
+        title_box.setTextColor(Color.BLACK);
+        title_box.setTextSize(TEXT_SIZE*3/2);
+        title_box.setHighlightColor(Color.BLUE);
+        title_box.setPadding(PADDING, PADDING, PADDING, PADDING);
+        title_box.setGravity(Gravity.CENTER);
+
+
+        // Format tags
+        tags_box = findViewById(R.id.tags);
+        tags_box.setText(storyParts[1]);
+
+        tags_box.setTextColor(Color.BLACK);
+        tags_box.setTextSize(TEXT_SIZE*5/4);
+        tags_box.setHighlightColor(Color.BLUE);
+        tags_box.setPadding(PADDING, PADDING, PADDING, PADDING);
+        tags_box.setGravity(Gravity.CENTER);
+
+        // Format story
+        story_box = findViewById(R.id.STORY);
+//        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
+        story_box.setText(storyParts[2]);
 
         story_box.setTextColor(Color.BLACK);
         story_box.setTextSize(TEXT_SIZE);
         story_box.setHighlightColor(Color.BLUE);
-        int padding = 10;
-        story_box.setPadding(padding, padding, padding, padding);
+        story_box.setPadding(PADDING, PADDING, PADDING, PADDING);
         story_box.setMovementMethod(new ScrollingMovementMethod());
 
-        // Add textview to LinearLayout
-        LinearLayout linearLayout = findViewById(R.id.rootContainer);
-        if (linearLayout != null) {
-            linearLayout.addView(story_box);
-        }
+//        // Add textview to LinearLayout
+//        LinearLayout linearLayout = findViewById(R.id.rootContainer);
+//        if (linearLayout != null) {
+//            linearLayout.addView(story_box);
+//        }
+
     }
 }
