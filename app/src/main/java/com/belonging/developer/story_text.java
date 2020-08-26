@@ -2,16 +2,15 @@ package com.belonging.developer;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.lang.Math.*;
 
 
 public class story_text extends AppCompatActivity implements AsyncResponse {
@@ -36,7 +35,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         String curUrl = i.getStringExtra("curUrl");
         startNewAsyncTask(curUrl, -2);
 
-        Button button = (Button) findViewById(R.id.return_btn);
+        Button button = findViewById(R.id.return_btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +45,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        Button increase = (Button) findViewById(R.id.increaseSizeButton);
+        Button increase = findViewById(R.id.increaseSizeButton);
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +53,7 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
             }
         });
 
-        Button decrease = (Button) findViewById(R.id.decreaseSizeButton);
+        Button decrease = findViewById(R.id.decreaseSizeButton);
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +74,12 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
 
         // Format title
         title_box = findViewById(R.id.title);
-        title_box.setText(storyParts[0]);
-
+//        title_box.setText(storyParts[0]);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            title_box.setText(Html.fromHtml(storyParts[0], Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            title_box.setText(Html.fromHtml(storyParts[0]));
+        }
         title_box.setTextColor(Color.BLACK);
         title_box.setTextSize(TEXT_SIZE*3/2);
         title_box.setHighlightColor(Color.BLUE);
@@ -86,8 +89,12 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
 
         // Format tags
         tags_box = findViewById(R.id.tags);
-        tags_box.setText(storyParts[1]);
-
+//        tags_box.setText(storyParts[1]);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tags_box.setText(Html.fromHtml(storyParts[1], Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            tags_box.setText(Html.fromHtml(storyParts[1]));
+        }
         tags_box.setTextColor(Color.BLACK);
         tags_box.setTextSize(TEXT_SIZE*5/4);
         tags_box.setHighlightColor(Color.BLUE);
@@ -98,13 +105,18 @@ public class story_text extends AppCompatActivity implements AsyncResponse {
         story_box = findViewById(R.id.STORY);
 //        story_box.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
-        story_box.setText(storyParts[2]);
-
+//        story_box.setText(storyParts[2]);
         story_box.setTextColor(Color.BLACK);
         story_box.setTextSize(TEXT_SIZE);
         story_box.setHighlightColor(Color.BLUE);
         story_box.setPadding(PADDING, PADDING, PADDING, PADDING);
         story_box.setMovementMethod(new ScrollingMovementMethod());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            story_box.setText(Html.fromHtml(storyParts[2], Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            story_box.setText(Html.fromHtml(storyParts[2]));
+        }
 
 //        // Add textview to LinearLayout
 //        LinearLayout linearLayout = findViewById(R.id.rootContainer);
