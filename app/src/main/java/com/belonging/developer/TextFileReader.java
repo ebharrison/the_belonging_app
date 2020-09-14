@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Pattern;
 
 public class TextFileReader extends AsyncTask<String, Void, String> {
     private String TextHolder = "", TextHolder2 = "";
@@ -126,5 +125,4 @@ public class TextFileReader extends AsyncTask<String, Void, String> {
         }
         return returnURL;
     }
-
 }
