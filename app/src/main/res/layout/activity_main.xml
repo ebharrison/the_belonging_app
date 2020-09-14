@@ -38,6 +38,8 @@
 
         <ListView
             android:id="@+id/storyList"
+            android:background="@drawable/customlistview"
+            android:theme="@android:style/Theme.Light"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"

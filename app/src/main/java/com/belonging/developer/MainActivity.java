@@ -2,8 +2,8 @@ package com.belonging.developer;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         listView = findViewById(R.id.storyList);  // main list to display all the stories
         // set listview so when a story is clicked, it takes you to the story page
 
+        listView.setBackgroundResource(R.drawable.customlistview);
         listView.setBackgroundColor(Color.LTGRAY);
 
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
