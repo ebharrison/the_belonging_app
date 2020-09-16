@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/customshape"
     tools:context=".resources_activity">
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    <!--    <WebView-->
+    <!--        android:id="@+id/webview"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="@drawable/customshape"-->
+    <!--        />-->
 
     <ImageView
         android:id="@+id/imageView2"
@@ -27,21 +29,22 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="318dp"
-        android:layout_height="360dp"
+        android:layout_width="412dp"
+        android:layout_height="599dp"
         android:layout_marginStart="33dp"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="33dp"
         android:layout_marginRight="33dp"
+        android:background="@color/cardview_light_background"
         android:fontFamily="@font/nr"
         android:maxLines="15"
         android:text="UC DAVIS POLICE (Non-Emergency) &amp;
         CAMPUS ESCORT SERVICE \n 530-752-COPS(2677) \n \n CAMPUS EMERGENCY STATUS LINE
         \n 530-752-4000 \n \n REPORT AND EMERGENCY \n DIAL 911 \n (From a cell, 530-752-1230) \n \n COUNSELING SERVICES \n 530-752-2349
         \n \n Click for more info"
-        android:textColor="#2C2C2F"
-        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
