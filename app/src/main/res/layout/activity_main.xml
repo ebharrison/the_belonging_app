@@ -52,14 +52,14 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
 
-        android:indeterminateDrawable="@drawable/progress_icon"
+        android:layout_width="214dp"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="246dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:indeterminateDrawable="@drawable/progress_icon"
         app:layout_constraintBottom_toBottomOf="@+id/rootContainer"
         app:layout_constraintEnd_toEndOf="@+id/rootContainer"
         app:layout_constraintStart_toStartOf="@+id/rootContainer"
