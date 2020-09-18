@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // set listview so when a story is clicked, it takes you to the story page
 
         listView.setBackgroundResource(R.drawable.customlistview);
-        listView.setBackgroundColor(Color.LTGRAY);
+        listView.setBackgroundColor(Color.WHITE);
 
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
