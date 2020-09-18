@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -260,9 +261,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             loadingSpinner.setVisibility(View.INVISIBLE);
 
             storyTitles.addAll(storyToUrl.keySet());
-            adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, storyTitles);
+            adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, sort(storyTitles));
 
             listView.setAdapter(adapter);
         }
+    }
+
+    private ArrayList<String> sort(ArrayList<String> list) {
+        String[] old_list = list.toArray(new String[0]);
+        Arrays.sort(old_list);
+        return new ArrayList<String>(Arrays.asList(old_list));
     }
 }
