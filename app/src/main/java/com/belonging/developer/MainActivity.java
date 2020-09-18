@@ -220,6 +220,19 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
     }
 
+    // Function to remove non-alphanumeric
+    // characters from string
+    public static String removeNonAlphanumeric(String str) {
+        // replace the given string
+        // with empty string
+        // except the pattern "[^a-zA-Z0-9]"
+        str = str.replaceAll(
+                "[^a-zA-Z0-9 ]", "");
+
+        // return string
+        return str;
+    }
+
     private void readStoryData() {
         //fileContents now contain first two lines of present story to be handled
         //first line is the title, second line is tags
@@ -228,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // need static counter for index of which url is currently being read because yeah coding
         // this was the best working solution i could come up with
         String cur_url = allStoryUrl[indexUrl++];
+
+        fileContents[0] = removeNonAlphanumeric(fileContents[0]);
 
         try {
             // first analyze the tags for the story
