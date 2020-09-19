@@ -9,6 +9,20 @@
 
     <!-- Primary used for buttons -->
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="214dp"
+        android:layout_height="246dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:foregroundGravity="center"
+        android:indeterminateDrawable="@drawable/progress_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
@@ -27,64 +41,50 @@
 
     <LinearLayout
         android:id="@+id/rootContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="545dp"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/dailyAphoroism">
 
         <ListView
             android:id="@+id/storyList"
-            android:background="@drawable/customlistview"
-            android:theme="@android:style/Theme.Light"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/customlistview"
+            android:gravity="center"
             android:scrollingCache="true"
-            android:smoothScrollbar="true" />
+            android:smoothScrollbar="true"
+            android:theme="@android:style/Theme.Light">
+
+        </ListView>
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-
-        android:indeterminateDrawable="@drawable/progress_icon"
-
+    <Button
+        android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rootContainer"
-        app:layout_constraintEnd_toEndOf="@+id/rootContainer"
-        app:layout_constraintStart_toStartOf="@+id/rootContainer"
-        app:layout_constraintTop_toTopOf="@+id/rootContainer" />
-
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="115dp"
-        android:layout_height="46dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_button"
+        android:gravity="center_horizontal"
         android:padding="10dp"
         android:text="@android:string/search_go"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/resoucesButton"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/aboutButton"
-        app:layout_constraintTop_toBottomOf="@+id/rootContainer"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/aboutButton" />
+
 
     <Button
         android:id="@+id/resoucesButton"
         android:layout_width="wrap_content"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="39dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
@@ -92,10 +92,24 @@
         android:background="@drawable/custom_button"
         android:padding="10dp"
         android:text="Resources"
-        android:textSize="18sp"
+        android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rootContainer"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/dailyAphoroism"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="The most important thing you will ever wear is your attitude. – Jeff Moore"
+        android:background="#FFFFFF"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

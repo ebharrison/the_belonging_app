@@ -1,9 +1,8 @@
 package com.belonging.developer;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,7 +41,7 @@ public class search_bar_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
 
-        Button returnBtn = (Button) findViewById(R.id.returnBtn);
+        Button returnBtn = findViewById(R.id.returnBtn);
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {  // change to search activity
@@ -52,10 +51,10 @@ public class search_bar_activity extends AppCompatActivity {
             }
         });
 
-        final SearchView searchView = (SearchView) findViewById(R.id.searchView);
-        searchView.setBackgroundColor(Color.LTGRAY);
-        listView = (ListView) findViewById(R.id.myList);
-        listView.setBackgroundColor(Color.LTGRAY);
+        final SearchView searchView = findViewById(R.id.searchView);
+//        searchView.setBackgroundColor(Color.LTGRAY);
+        listView = findViewById(R.id.myList);
+//        listView.setBackgroundColor(Color.WHITE);
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();

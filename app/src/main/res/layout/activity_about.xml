@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/customshape"
     tools:context=".about_activity">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollIndicators="bottom"
+        android:scrollbarSize="30dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -22,19 +26,25 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="50dp"
                 android:gravity="top"
                 android:text="@string/about_page"
                 android:textSize="20dp"
+                android:background="#FFFFFF"
                 android:textColor="#000"/>
+
+            <!--            Start of credits-->
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/credits"
+                android:layout_gravity="center"
                 android:textSize="30dp"
-                android:textColor="#fff"/>
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -42,12 +52,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/citris"
                 android:textSize="20dp"
-                android:textColor="#fff"/>
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:textColor="#000000" />
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:id="@+id/citrisLogoAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="142dp"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:layout_marginTop="12dp"
                 app:srcCompat="@drawable/citris_logo" />
 
             <TextView
@@ -56,12 +71,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/kali"
                 android:textSize="20dp"
-                android:textColor="#fff"/>
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:textColor="#000000" />
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:layout_width="155dp"
+                android:layout_height="121dp"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:layout_marginTop="12dp"
                 app:srcCompat="@drawable/kali_trzesniewski" />
 
             <TextView
@@ -70,15 +90,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/susan"
                 android:textSize="20dp"
-                android:textColor="#fff"/>
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:textColor="#000000" />
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="149dp"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:layout_marginTop="12dp"
                 app:srcCompat="@drawable/susan_ebeler" />
         </LinearLayout>
-        android:text="TextView" />
+        <!--        android:text="TextView" />-->
     </FrameLayout>
     </ScrollView>
 

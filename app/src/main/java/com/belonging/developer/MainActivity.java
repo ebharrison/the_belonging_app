@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // set listview so when a story is clicked, it takes you to the story page
 
         listView.setBackgroundResource(R.drawable.customlistview);
-        listView.setBackgroundColor(Color.LTGRAY);
+        listView.setBackgroundColor(Color.WHITE);
 
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
@@ -219,6 +220,19 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
     }
 
+    // Function to remove non-alphanumeric
+    // characters from string
+    public static String removeNonAlphanumeric(String str) {
+        // replace the given string
+        // with empty string
+        // except the pattern "[^a-zA-Z0-9]"
+        str = str.replaceAll(
+                "[^a-zA-Z0-9 ]", "");
+
+        // return string
+        return str;
+    }
+
     private void readStoryData() {
         //fileContents now contain first two lines of present story to be handled
         //first line is the title, second line is tags
@@ -227,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         // need static counter for index of which url is currently being read because yeah coding
         // this was the best working solution i could come up with
         String cur_url = allStoryUrl[indexUrl++];
+
+        fileContents[0] = removeNonAlphanumeric(fileContents[0]);
 
         try {
             // first analyze the tags for the story
@@ -260,9 +276,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
             loadingSpinner.setVisibility(View.INVISIBLE);
 
             storyTitles.addAll(storyToUrl.keySet());
-            adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, storyTitles);
+            adapter = new ArrayAdapter<String>(this, R.layout.listrow, R.id.rowLayout, sort(storyTitles));
 
             listView.setAdapter(adapter);
         }
+    }
+
+    private ArrayList<String> sort(ArrayList<String> list) {
+        String[] old_list = list.toArray(new String[0]);
+        Arrays.sort(old_list);
+        return new ArrayList<String>(Arrays.asList(old_list));
     }
 }
