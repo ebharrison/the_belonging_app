@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         checkProgressAsyncTasks();
     }
 
+
     // Returns hashmap with tags as keys, and list of stories with the tag as the value
     // the filename must be a list of urls to the corresponding stories
     private void processStories() {
