@@ -283,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         }
     }
 
+
     private ArrayList<String> sort(ArrayList<String> list) {
         String[] old_list = list.toArray(new String[0]);
         Arrays.sort(old_list);
