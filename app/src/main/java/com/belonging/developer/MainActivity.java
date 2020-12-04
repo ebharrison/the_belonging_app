@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 /**
  * IMPORTANT! STORY TITLE PRECEEDS TAGS IN EACH STORY FILE
- */
+        */
 
 // change menu icon
 //https://stackoverflow.com/questions/26300480/how-to-change-option-menu-icon-in-the-action-bar
@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                 Intent i = new Intent(MainActivity.this, about_activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
 
